@@ -1,0 +1,122 @@
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: $z-index-overlay;
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch;
+
+  background: darken($brand-primary, 10%);
+  background: transparentize(darken($brand-primary, 10%), 0.02);
+  color: $white;
+  opacity: 0;
+}
+
+.overlay-close {
+  cursor: pointer;
+  z-index: 1;
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  overflow: hidden;
+  @include square(50px);
+
+  font-size: 70px;
+  line-height: 50px;
+  text-align: center;
+  color: $white;
+  transition: all 200ms ease-in-out;
+  &:hover,
+  &:focus {
+    color: $white;
+    text-shadow: 0 0 10px mix($white, $black, 50%);
+    // text-shadow: 0 0 10px transparentize($white, 0.5);
+    transform: scale(1.05);
+    transition: all 200ms ease-in-out;
+  }
+}
+
+.overlay-content-container {
+  height: 100%;
+  width: 100%;
+  // Use this to vertically center all the content in the overlay
+  display: box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: flex;
+  box-orient: vertical;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  flex-direction: column;
+  -ms-flex-direction: column;
+  box-align: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  -o-align-items: center;
+  align-items: center;
+  -ms-flex-align: center;
+  box-pack: center;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  -o-justify-content: center;
+  justify-content: center;
+  -ms-flex-pack: center;
+}
+
+.overlay-content {
+  @include opacity(0);
+  transform: translateY(-20px);
+  -webkit-transition: -webkit-transform 300ms ease-out;
+     -moz-transition: -moz-transform 300ms ease-out;
+       -o-transition: -o-transform 300ms ease-out;
+          transition: transform 300ms ease-out;
+
+  iframe {
+    max-height: 250px;
+  }
+}
+
+.overlay-title {
+  margin-top: ($line-height-computed / 2);
+  margin-bottom: ($line-height-computed / 2);
+  text-transform: uppercase;
+  font-family: $headings-font-family;
+  font-weight: $headings-font-weight;
+  font-size: $font-size-h3;
+}
+
+/* body.overlay-open */
+.overlay-open {
+  overflow: hidden;
+  .overlay {
+    overflow-x: hidden;
+    overflow-y: auto;
+    .overlay-content {
+      @include opacity(1);
+      transform: translateY(0px);
+      -webkit-transition: -webkit-transform 500ms ease-out;
+         -moz-transition: -moz-transform 500ms ease-out;
+           -o-transition: -o-transform 500ms ease-out;
+              transition: transform 500ms ease-out;
+      transition-delay: 400ms;
+    }
+  }
+}
+
+@media (min-width: $screen-sm-min) {
+  .overlay-content {
+    iframe {
+      max-height: none;
+    }
+  }
+  .overlay-title {
+    margin-top: $line-height-computed;
+    margin-bottom: ($line-height-computed / 2);
+    font-size: $font-size-h1;
+  }
+}

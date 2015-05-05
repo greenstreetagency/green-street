@@ -1,0 +1,74 @@
+@mixin reset-input-styles(){
+  margin: 0;
+  padding: 0;
+  border: none;
+  font: inherit;
+  line-height: normal;
+  border-radius: 0;
+  &:focus {
+    outline: 0;
+  }
+}
+
+.overlay-input {
+  @include reset-input-styles();
+  margin-bottom: $padding-xlarge-vertical;
+  padding: 10px;
+  width: 100%;
+  background-color: $black;
+  background-color: transparent;
+  border-color: $white;
+  border-color: transparentize($white, 0.4);
+  border-style: solid;
+
+  font-size: $font-size-base;
+
+  &.error {
+    border-color: #B93B3B;
+    transition: border-color 100ms ease-out;
+  }
+}
+
+input.overlay-input {
+  border-width: 0 0 2px 0;
+}
+
+textarea.overlay-input {
+  border-width: 2px;
+  height: 60px;
+  padding-left: 10px - 2px // padding minus border-width
+}
+
+input[type="submit"].overlay-input {
+  background-color: $white;
+  background-color: transparentize($white, 0.1);
+  color: darken($brand-primary, 10%);
+  font-size: $font-size-base;
+  text-transform: uppercase;
+  font-weight: bold;
+  transform: scale(1);
+  -webkit-transition: -webkit-transform 100ms ease-in-out;
+     -moz-transition: -moz-transform 100ms ease-in-out;
+       -o-transition: -o-transform 100ms ease-in-out;
+          transition: transform 100ms ease-in-out;
+  &:hover,
+  &:focus {
+    transform: scale(1.02);
+  }
+  &:active {
+    transform: scale(0.98);
+    -webkit-transition: -webkit-transform 50ms ease-out;
+       -moz-transition: -moz-transform 50ms ease-out;
+         -o-transition: -o-transform 50ms ease-out;
+            transition: transform 50ms ease-out;
+  }
+}
+
+@media (min-width: $screen-sm-min) {
+  .overlay-input {
+    font-size: $font-size-large * 1.2;
+  }
+  textarea.overlay-input {
+    height: 100px;
+  }
+}

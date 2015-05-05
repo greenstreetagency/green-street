@@ -1,0 +1,72 @@
+@import "variables";
+@import "mixins";
+
+@import "normalize";
+@import "scaffolding";
+@import "type";
+@import "grid";
+@import "tables";
+@import "forms";
+@import "buttons";
+@import "overlay";
+
+@import "utilities";
+
+@import "green-street";
+
+body {
+  margin: 0 auto;
+  height: 100%;
+}
+
+.scroll-container {
+  @include clearfix;
+  min-height: 100%;
+}
+
+section {
+  // position: relative;
+  // float: left;
+  // width: 100%;
+  // min-height: 740px;
+}
+.slide {
+  positon: relative;
+  height: 600px;
+  width: 100%;
+  left: 0;
+  float: left;
+  // background-color: $white;
+
+  &--fixed {
+    position: fixed !important;
+    top: $header-height-xs !important;
+  }
+}
+
+.v-center {
+  display: table;
+  height: 100%;
+  width: 100%;
+}
+.v-center-content {
+  display: table-cell;
+  vertical-align: middle;
+  height: 100%;
+  text-align: center;
+}
+
+.slide .v-center {
+  // margin-top: -$header-height-xs / 2;
+}
+
+@media (min-width: $screen-sm-min) {
+  .slide {
+    &--fixed {
+      top: $header-height !important;
+    }
+    .v-center {
+      // margin-top: -$header-height / 2;
+    }
+  }
+}

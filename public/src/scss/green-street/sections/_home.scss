@@ -1,0 +1,34 @@
+.home-bg {
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-image: url(/img/home-bg.jpg);
+  background-size: cover;
+  background-position: center 0;
+}
+
+.home-taglines-wrapper {
+  position: relative;
+}
+
+.home-tagline {
+  position: absolute;
+  width: 100%;
+  top: -$header-height-xs;
+  padding: 0 10px;
+  font-size: 40px;
+  text-transform: uppercase;
+  color: $black;
+  font-weight: bold;
+  text-align: center;
+}
+
+@media (min-width: $screen-sm-min) {
+  .home-tagline {
+    top: -$header-height;
+    font-size: 60px;
+  }
+}

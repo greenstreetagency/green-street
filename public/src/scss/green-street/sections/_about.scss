@@ -1,0 +1,78 @@
+.about-title {
+  text-transform: uppercase;
+  font-family: "Avenir";
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin-bottom: $line-height-computed / 2;
+}
+
+.about-points {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-bottom: $line-height-computed;
+  li {
+    margin-bottom: 5px;
+  }
+}
+
+.about-description {
+  font-weight: bold;
+  font-size: $font-size-small;
+  text-transform: uppercase;
+}
+
+.about-circle-container {
+  display: block;
+  text-align: center;
+}
+.about-circle {
+  @include square(260px);
+  border-radius: 50%;
+  background: $white;
+  margin: 0 auto;
+  padding: 10px;
+  box-shadow: 0 0 15px -10px $gray-dark;
+  border: 1px solid darken($white, 5%);
+}
+.about-circle-content-wrap {
+  display: table;
+  @include square(100%);
+}
+.about-circle-content {
+  display: table-cell;
+  vertical-align: middle;
+  position: relative;
+}
+
+.about-step {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+
+  transform: translateY(-50%);
+
+  h1, h2, h3 {
+    margin: 0;
+  }
+}
+
+.slide {
+  &--branding {
+    background-color: lighten($gs-teal, 5%);
+  }
+  &--touch-points {
+    background-color: lighten($gs-blue, 10%);
+  }
+  &--executions {
+    background-color: lighten($gs-magenta, 10%);
+  }
+}
+
+@media (min-width: $screen-sm-min) {
+  .about-circle {
+    @include square(400px);
+  }
+}

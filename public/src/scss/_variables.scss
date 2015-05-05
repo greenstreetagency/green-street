@@ -1,0 +1,241 @@
+
+// Colors
+// ===============================================================================================
+
+$black:                          #000         !default;
+$gray-darker:            lighten(#000, 13.5%) !default; // #222
+$gray-dark:              lighten(#000, 20%)   !default; // #333
+$gray:                   lighten(#000, 33.5%) !default; // #555
+$gray-light:             lighten(#000, 46.7%) !default; // #777
+$gray-lighter:           lighten(#000, 70%)   !default; // #b3b3b3
+$gray-lighterer:         lighten(#000, 80%)   !default;
+$gray-lightest:          lighten(#000, 93.5%) !default; // #eee
+$white:                          #FFF         !default;
+
+$brand-primary: #0F6748 !default;
+
+$gs-blue:               #28ACE2 !default;
+$gs-teal:               #13A89E !default;
+$gs-magenta:            #9F1F63 !default;
+
+
+// Scaffolding
+// ===============================================================================================
+
+$body-bg:               $white !default;
+$text-color:            $black !default;
+$link-color:            $brand-primary !default;
+$link-hover-color:      darken($link-color, 8%) !default;
+
+
+// Typography
+// ===============================================================================================
+
+$font-family-sans-serif:  "Avenir", "Gotham Book", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+// $font-family-serif:       Georgia, "Times New Roman", Times, serif !default;
+$font-family-base:        $font-family-sans-serif !default;
+
+$font-size-base:          12px !default;
+$font-size-large:         ceil(($font-size-base * 1.33)) !default; // ~16px
+$font-size-small:         floor(($font-size-base * 0.85)) !default; // ~10px
+
+$font-size-h1:            floor(($font-size-base * 2.6)) !default; // 31px
+$font-size-h2:            floor(($font-size-base * 2.15)) !default; // ~25px
+$font-size-h3:            ceil(($font-size-base * 1.7)) !default; // ~20px
+$font-size-h4:            ceil(($font-size-base * 1.5)) !default; // ~18px
+$font-size-h5:            ceil(($font-size-base * 1.3)) !default; // ~16px
+$font-size-h6:            $font-size-base               !default;
+
+$font-weight-light:       100 !default;
+$font-weight-normal:      400 !default;
+$font-weight-bold:        600 !default;
+
+//** Unit-less `line-height` for use in components like buttons.
+$line-height-base:        1.5 !default; // 18/12
+//** Computed "line-height" (`font-size` * `line-height`) for use with `margin`, `padding`, etc.
+$line-height-computed:    floor(($font-size-base * $line-height-base)) !default; // ~18px
+
+$headings-font-family:    'Avenir', inherit !default;
+$headings-font-weight:    $font-weight-bold !default;
+$headings-line-height:    1.1 !default;
+$headings-color:          inherit !default;
+
+//== Components
+//
+//## Define common padding and border radius sizes and more. Values based on 14px text and 1.428 line-height (~20px to start).
+
+$padding-base-vertical:     5px !default;
+$padding-base-horizontal:   10px !default;
+
+$padding-large-vertical:    8px !default;
+$padding-large-horizontal:  14px !default;
+
+$padding-xlarge-vertical:   $padding-large-vertical * 1.5;
+$padding-xlarge-horizontal: $padding-large-horizontal * 1.5;
+
+$padding-small-vertical:    3px !default;
+$padding-small-horizontal:  7px !default;
+
+$padding-xs-vertical:       1px !default;
+$padding-xs-horizontal:     4px !default;
+
+$line-height-large:         1.33 !default;
+$line-height-small:         1.5 !default;
+
+$border-radius-base:        2px !default;
+$border-radius-large:       4px !default;
+$border-radius-small:       1px !default;
+
+//== Buttons
+//
+$btn-font-weight:                bold !default;
+$btn-border-width:               2px  !default;
+
+// $btn-default-color:              #333 !default;
+// $btn-default-bg:                 #fff !default;
+// $btn-default-border:             #ccc !default;
+
+// $btn-primary-color:              #fff !default;
+// $btn-primary-bg:                 $brand-primary !default;
+// $btn-primary-border:             darken($btn-primary-bg, 5%) !default;
+
+// $btn-success-color:              #fff !default;
+// $btn-success-bg:                 $brand-success !default;
+// $btn-success-border:             darken($btn-success-bg, 5%) !default;
+
+// $btn-info-color:                 #fff !default;
+// $btn-info-bg:                    $brand-info !default;
+// $btn-info-border:                darken($btn-info-bg, 5%) !default;
+
+// $btn-warning-color:              #fff !default;
+// $btn-warning-bg:                 $brand-warning !default;
+// $btn-warning-border:             darken($btn-warning-bg, 5%) !default;
+
+// $btn-danger-color:               #fff !default;
+// $btn-danger-bg:                  $brand-danger !default;
+// $btn-danger-border:              darken($btn-danger-bg, 5%) !default;
+
+// $btn-link-disabled-color:        $gray-light !default;
+
+//== Forms
+//
+//##
+
+//** `<input>` background color
+$input-bg:                       #fff !default;
+//** `<input disabled>` background color
+$input-bg-disabled:              $gray-lighter !default;
+
+//** Text color for `<input>`s
+$input-color:                    $text-color !default;
+//** `<input>` border color
+$input-border:                   $gray !default;
+//** `<input>` border radius
+$input-border-radius:            $border-radius-base !default;
+//** Border color for inputs on focus
+$input-border-focus:             darken($input-border, 20%) !default;
+
+//** Placeholder text color
+$input-color-placeholder:        $gray-light !default;
+
+//** Default `.form-control` height
+// $input-height-base:           ($line-height-computed + ($padding-base-vertical * 2) + 2) !default **;
+$input-height-base:           auto;
+
+$text-muted:                  $gray-light !default;
+$abbr-border-color:           $gray-light !default;
+$headings-small-color:        $gray-light !default;
+$blockquote-small-color:      $gray-light !default;
+$blockquote-font-size:        ($font-size-base * 1.25) !default;
+$blockquote-border-color:     $gray-lighter !default;
+$page-header-border-color:    $gray-lighter !default;
+
+$hr-border:                   $brand-primary !default;
+
+//== Media queries breakpoints
+//
+//## Define the breakpoints at which your layout will change, adapting to different screen sizes.
+
+// Extra small screen / phone
+//** Deprecated `$screen-xs` as of v3.0.1
+$screen-xs:                  480px !default;
+//** Deprecated `$screen-xs-min` as of v3.2.0
+$screen-xs-min:              $screen-xs !default;
+//** Deprecated `$screen-phone` as of v3.0.1
+$screen-phone:               $screen-xs-min !default;
+
+// Small screen / tablet
+//** Deprecated `$screen-sm` as of v3.0.1
+$screen-sm:                  768px !default;
+$screen-sm-min:              $screen-sm !default;
+//** Deprecated `$screen-tablet` as of v3.0.1
+$screen-tablet:              $screen-sm-min !default;
+
+// Medium screen / desktop
+//** Deprecated `$screen-md` as of v3.0.1
+$screen-md:                  992px !default;
+$screen-md-min:              $screen-md !default;
+//** Deprecated `$screen-desktop` as of v3.0.1
+$screen-desktop:             $screen-md-min !default;
+
+// Large screen / wide desktop
+//** Deprecated `$screen-lg` as of v3.0.1
+$screen-lg:                  1200px !default;
+$screen-lg-min:              $screen-lg !default;
+//** Deprecated `$screen-lg-desktop` as of v3.0.1
+$screen-lg-desktop:          $screen-lg-min !default;
+
+// So media queries don't overlap when required, provide a maximum
+$screen-xs-max:              ($screen-sm-min - 1) !default;
+$screen-sm-max:              ($screen-md-min - 1) !default;
+$screen-md-max:              ($screen-lg-min - 1) !default;
+
+
+//== Grid system
+//
+//## Define your custom responsive grid.
+
+//** Number of columns in the grid.
+$grid-columns:              12 !default;
+//** Padding between columns. Gets divided in half for the left and right.
+$grid-gutter-width:         30px !default;
+// Navbar collapse
+//** Point at which the navbar becomes uncollapsed.
+$grid-float-breakpoint:     $screen-sm-min !default;
+//** Point at which the navbar begins collapsing.
+$grid-float-breakpoint-max: ($grid-float-breakpoint - 1) !default;
+
+
+//== Container sizes
+//
+//## Define the maximum width of `.container` for different screen sizes.
+
+// Small screen / tablet
+$container-tablet:             (720px + $grid-gutter-width) !default;
+//** For `$screen-sm-min` and up.
+$container-sm:                 $container-tablet !default;
+
+// Medium screen / desktop
+$container-desktop:            (940px + $grid-gutter-width) !default;
+//** For `$screen-md-min` and up.
+$container-md:                 $container-desktop !default;
+
+// Large screen / wide desktop
+$container-large-desktop:      (1140px + $grid-gutter-width) !default;
+//** For `$screen-lg-min` and up.
+$container-lg:                 $container-large-desktop !default;
+
+//== Component Sizes
+//
+
+$header-height-xs:          64px;
+$header-height:             80px;
+$header-padding-horizontal: $grid-gutter-width / 2;
+$header-padding-vertical:   12px;
+$header-height-xs--usable:  $header-height-xs - $header-padding-vertical * 2;
+$header-height--usable:     $header-height    - $header-padding-vertical * 2;
+
+//== Z-indexes
+//
+$z-index-header: 100;
+$z-index-overlay: $z-index-header + 1;
