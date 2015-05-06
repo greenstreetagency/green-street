@@ -1,8 +1,11 @@
+var $ = require('jquery');
+
 ScrollUpBtn = function($el) {
   var self = this;
   var $btn = $el;
 
   var AUTO_SCROLL_SPEED = 8;
+  var isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
   var touchScroll = !1;
 
   /**
@@ -48,7 +51,7 @@ ScrollUpBtn = function($el) {
        touchScroll.scrollTo(0, 0, durationMs);
      }
      else {
-       $('html, body').animate({
+       $(isFirefox ? 'html' : 'body').animate({
          scrollTop: 0
         },
         durationMs
@@ -65,7 +68,10 @@ ScrollUpBtn = function($el) {
       cursor: 'pointer'
     })
     .attr('title', 'Scroll To Top')
-    .on('click', self.scrollToTop);
+    .on('click', function(e){
+      self.scrollToTop();
+      return false;
+    });
     return self;
   }
 

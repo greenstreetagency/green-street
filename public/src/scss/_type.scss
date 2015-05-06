@@ -6,41 +6,52 @@ $font-path: '../fonts' !default;
 
 @font-face {
   font-family: 'Gotham Black';
-  // src: url('gothan-black.eot');
-  src: 
+  src: url('gothan-black.eot');
+  src:
     url("#{$font-path}/gotham-black.woff") format("woff"),
     url("#{$font-path}/gotham-black.otf") format("opentype"),
-    url("#{$font-path}/gotham-black.svg#grablau") format("svg");
+    url("#{$font-path}/gotham-black.svg#GothamBlack") format("svg");
 }
 
 @font-face {
   font-family: 'Gotham Book';
-  // src: url('gothan-black.eot');
-  src: 
+  src: url('gothan-black.eot');
+  src:
     url("#{$font-path}/gotham-book.woff") format("woff"),
     url("#{$font-path}/gotham-book.otf") format("opentype"),
-    url("#{$font-path}/gotham-book.svg#grablau") format("svg");
+    url("#{$font-path}/gotham-book.svg#GothamBook") format("svg");
 }
 
 @font-face {
   font-family: 'Avenir';
-  // src: url('gothan-black.eot');
-  src: 
+  src: url("#{$font-path}/avenir-next-regular.woff");
+  src:
     url("#{$font-path}/avenir-next-regular.woff") format("woff"),
     url("#{$font-path}/avenir-next-regular.otf") format("opentype"),
-    url("#{$font-path}/avenir-next-regular.svg#grablau") format("svg");
+    url("#{$font-path}/avenir-next-regular.svg#AvenirNextLTW01RegularRegular") format("svg");
   font-weight: normal;
 }
 
 @font-face {
   font-family: 'Avenir';
-  // src: url('gothan-black.eot');
-  src: 
+  src: url('#{$font-path}/avenir-next-bold.eot');
+  src:
     url("#{$font-path}/avenir-next-bold.woff") format("woff"),
     url("#{$font-path}/avenir-next-bold.otf") format("opentype"),
-    url("#{$font-path}/avenir-next-bold.svg#grablau") format("svg");
+    url("#{$font-path}/avenir-next-bold.svg#AvenirNextLTW01BoldRegular") format("svg");
   font-weight: bold;
 }
+
+// Avenir - Italic
+// @font-face {
+//   font-family: 'Avenir';
+//   src: url('#{$font-path}/avenir-next-italic.eot');
+//   src:
+//     url("#{$font-path}/avenir-next-italic.woff") format("woff"),
+//     url("#{$font-path}/avenir-next-italic.otf") format("opentype"),
+//     url("#{$font-path}/avenir-nextitalic.svg#AvenirNextLTW01ItalicRegular") format("svg");
+//   font-style: italic;
+// }
 
 // Headings
 // -------------------------

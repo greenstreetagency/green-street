@@ -2,3 +2,8 @@
 @import "sections/clients";
 @import "sections/home";
 @import "sections/process";
+
+.section-title {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}

@@ -1,14 +1,15 @@
 .slide--home {
   padding-top: $header-height-xs;
+  overflow: hidden;
 }
 
 .home-bg {
   position: absolute;
   z-index: 0;
-  top: -5px; // stretching the bg outside the viewport means we can blur this without getting a white border around it
-  left: -5px;
+  top:    -5px; // stretching the bg outside the viewport means we can blur this without getting a white border around it
+  left:   -5px;
   bottom: -5px;
-  right: -5px;
+  right:  -5px;
   background-image: url(/img/home-bg-xs.jpg);
   background-size: cover;
   background-position: center 0;

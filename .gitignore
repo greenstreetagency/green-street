@@ -7,6 +7,7 @@ node_modules/connect-livereload
 node_modules/express
 node_modules/gulp
 node_modules/gulp-autoprefixer
+node_modules/gulp-file-include
 node_modules/gulp-livereload
 node_modules/gulp-notify
 node_modules/gulp-plumber

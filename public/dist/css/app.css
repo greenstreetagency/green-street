@@ -246,17 +246,21 @@ code {
 
 @font-face {
   font-family: 'Gotham Black';
-  src: url("../fonts/gotham-black.woff") format("woff"), url("../fonts/gotham-black.otf") format("opentype"), url("../fonts/gotham-black.svg#grablau") format("svg"); }
+  src: url("gothan-black.eot");
+  src: url("../fonts/gotham-black.woff") format("woff"), url("../fonts/gotham-black.otf") format("opentype"), url("../fonts/gotham-black.svg#GothamBlack") format("svg"); }
 @font-face {
   font-family: 'Gotham Book';
-  src: url("../fonts/gotham-book.woff") format("woff"), url("../fonts/gotham-book.otf") format("opentype"), url("../fonts/gotham-book.svg#grablau") format("svg"); }
+  src: url("gothan-black.eot");
+  src: url("../fonts/gotham-book.woff") format("woff"), url("../fonts/gotham-book.otf") format("opentype"), url("../fonts/gotham-book.svg#GothamBook") format("svg"); }
 @font-face {
   font-family: 'Avenir';
-  src: url("../fonts/avenir-next-regular.woff") format("woff"), url("../fonts/avenir-next-regular.otf") format("opentype"), url("../fonts/avenir-next-regular.svg#grablau") format("svg");
+  src: url("../fonts/avenir-next-regular.woff");
+  src: url("../fonts/avenir-next-regular.woff") format("woff"), url("../fonts/avenir-next-regular.otf") format("opentype"), url("../fonts/avenir-next-regular.svg#AvenirNextLTW01RegularRegular") format("svg");
   font-weight: normal; }
 @font-face {
   font-family: 'Avenir';
-  src: url("../fonts/avenir-next-bold.woff") format("woff"), url("../fonts/avenir-next-bold.otf") format("opentype"), url("../fonts/avenir-next-bold.svg#grablau") format("svg");
+  src: url("../fonts/avenir-next-bold.eot");
+  src: url("../fonts/avenir-next-bold.woff") format("woff"), url("../fonts/avenir-next-bold.otf") format("opentype"), url("../fonts/avenir-next-bold.svg#AvenirNextLTW01BoldRegular") format("svg");
   font-weight: bold; }
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
@@ -1497,7 +1501,7 @@ input[type="button"].btn-block {
     .header .blurb img {
       position: relative;
       height: 36px;
-      margin-left: 18px;
+      margin-left: 9px;
       top: -2px; }
 
 @media (min-width: 768px) {
@@ -1662,7 +1666,8 @@ input[type="button"].btn-block {
     width: 25%;
     padding-bottom: 25%; } }
 .slide--home {
-  padding-top: 64px; }
+  padding-top: 64px;
+  overflow: hidden; }
 
 .home-bg {
   position: absolute;
@@ -1798,6 +1803,10 @@ input[type="button"].btn-block {
 
   .process-step-descriptions {
     font-size: 21px; } }
+.section-title {
+  text-transform: uppercase;
+  letter-spacing: 1px; }
+
 .touch html,
 .touch body {
   overflow: hidden; }

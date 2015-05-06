@@ -159,7 +159,8 @@ var ScrollUpBtn = require('./components/ScrollUpBtn.js');
 
       var applyBlur = function() {
         TweenMax.set('.home-bg', {
-          webkitFilter : "blur(" + blurAmount.a + "px)"
+          webkitFilter : "blur(" + blurAmount.a + "px)",
+          filter       : "blur(" + blurAmount.a + "px)"
         })
       }
 
@@ -172,7 +173,7 @@ var ScrollUpBtn = require('./components/ScrollUpBtn.js');
       tweenGroup.push(
         TweenMax.to('#home-tagline-1', 1, {
           alpha: 0,
-          y: '-10%'
+          y: '-60%'
         })
       );
 
@@ -189,9 +190,10 @@ var ScrollUpBtn = require('./components/ScrollUpBtn.js');
       tL
       .add(tweenGroup)
       .add(TweenMax.to('#home-tagline-2', 1, {
-        alpha: 1,
-        scale: 1
-      }, "-=0.5"));
+            alpha: 1,
+            scale: 1
+          })
+      );
 
       scene.setTween(tL);
 
@@ -204,9 +206,9 @@ var ScrollUpBtn = require('./components/ScrollUpBtn.js');
       var $processDescriptions = $('.process-step-description');
       var processStepCount     = $processStepsInline.size();
 
-      $processStepsInline.css({'opacity' : 0.1});
-      $processStepsAbs.css({'opacity' : 0});
-      $processDescriptions.css({'opacity' : 0})
+      $processStepsInline.css(  {'opacity' : 0.1} );
+      $processStepsAbs.css(     {'opacity' : 0}   );
+      $processDescriptions.css( {'opacity' : 0}   )
 
       for (var i = 0; i < processStepCount; i++) {
         var stepInline = $processStepsInline[i];
@@ -379,7 +381,14 @@ var ScrollUpBtn = require('./components/ScrollUpBtn.js');
     scenes.branding = new ScrollMagic.Scene({
       triggerElement: '#branding'
     })
-    .setPin("#branding");
+    .setPin("#branding")
+    .on("enter", function(e){
+      // headerBlurb.setText('What We Do');
+    })
+    .on("leave", function(e){
+      // if(e.scrollDirection == "REVERSE")
+      //   headerBlurb.setText('Creative Cannabis Agency');
+    });
 
     scenes.touchPoints = new ScrollMagic.Scene({
       triggerElement: '#touch-points'
@@ -394,10 +403,28 @@ var ScrollUpBtn = require('./components/ScrollUpBtn.js');
     scenes.process = new ScrollMagic.Scene({
       triggerElement: '#process'
     })
-    .setPin("#process");
+    .setPin("#process")
+    .on("enter", function(e){
+      // console.log('enter process section');
+      // console.log(e);
+      // headerBlurb.setText('Our Process');
+    })
+    .on("leave", function(e){
+      // if(e.scrollDirection == "REVERSE")
+      //   headerBlurb.setText('What We Do');
+    });
 
     scenes.clients = new ScrollMagic.Scene({
       triggerElement: '#clients'
+    })
+    .on("enter", function(e){
+      // headerBlurb.setText('Clients');
+    })
+    .on("leave", function(e){
+      // console.log('leave clients');
+      // console.log(e);
+      // if(e.scrollDirection == "REVERSE")
+      //   headerBlurb.setText('Our Process');
     });
 
     scenes.footer = new ScrollMagic.Scene({

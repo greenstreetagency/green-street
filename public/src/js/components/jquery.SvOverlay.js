@@ -1,7 +1,5 @@
 var $ = require('jquery');
 
-
-
 /**
  * Overlay Constructor
  *
@@ -54,22 +52,13 @@ SvOverlay.prototype.show = function(){
 
   return this;
 
-  /*
-  this.$element.addClass('open');
-  this.isShown = true;
-  this.$body.addClass('overlay-open');
-  this.$element.on('click', '.overlay-close', $.proxy(this.hide, this));
-
-  var e = $.Event('show.sv.modal');
-  this.$element.trigger(e);
-  */
-
 };
 
 /**
  * Hides the overlay and removes event listeners
  *
- * @return {self}
+ * @param {Event} e
+ * @return {this}
  */
 SvOverlay.prototype.hide = function(e){
 
