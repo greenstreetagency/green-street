@@ -1,3 +1,20 @@
 .sass-cache
 .DS_Store
-node_modules
+
+# Dev Dependencies
+node_modules/browserify
+node_modules/connect-livereload
+node_modules/express
+node_modules/gulp
+node_modules/gulp-autoprefixer
+node_modules/gulp-livereload
+node_modules/gulp-notify
+node_modules/gulp-plumber
+node_modules/gulp-preprocess
+node_modules/gulp-rename
+node_modules/gulp-ruby-sass
+node_modules/gulp-uglify
+node_modules/multipipe
+node_modules/reactify
+node_modules/tiny-lr
+node_modules/vinyl-transform

@@ -1,3 +1,5 @@
+var $ = require('jquery');
+
 HeaderBlurb = function($el) {
 
   var $textEl = $el;

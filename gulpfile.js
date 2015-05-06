@@ -6,7 +6,7 @@ var styles   = require('./gulp/styles');
 var watch    = require('./gulp/watch');
 var copyLibs = require('./gulp/copy-libs');
 var copyHTML = require('./gulp/copy-html');
-var copyPHP = require('./gulp/copy-php');
+var copyPHP  = require('./gulp/copy-php');
 
 gulp.task('server', server);
 gulp.task('scripts', scripts);

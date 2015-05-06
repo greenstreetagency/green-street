@@ -1,15 +1,24 @@
-require('./components/jquery.SvOverlay.js'); // $.fn.overlay
+// Include dependencies
+var $           = require('jquery');
+var ScrollMagic = require('scrollmagic');
+                  require('scrollmagic-gsap');
+var IScroll     = require('iscroll-probe');
+var TweenMax    = require('tween-max');
 
+                  require('./components/jquery.SvOverlay.js'); // $.fn.overlay
+
+// Components
 var HeaderBlurb = require('./components/HeaderBlurb.js');
 var ContactForm = require('./components/ContactForm.js');
 var ScrollUpBtn = require('./components/ScrollUpBtn.js');
 
-(function($, Modernizr, ScrollMagic, IScroll, TweenMax, TimelineMax, undefined){
+
+// App Code
+(function(Modernizr, undefined){
 
   var touchEnabled = Modernizr.touch;
 
   var $win  = $(window);
-  var $doc  = $(document);
   var $body = $(document.body);
   var $header = $('.header');
   var $slides = $('.slide');
@@ -18,17 +27,17 @@ var ScrollUpBtn = require('./components/ScrollUpBtn.js');
   var scenes = {};
   var touchScroll; // IScroll instance
 
-  var headerBlurb = new HeaderBlurb($('#blurb-text'));
-  var contactForm = new ContactForm($('form#contact'));
-  var scrollUpBtn = new ScrollUpBtn($('.blurb img'));
+  var headerBlurb = new HeaderBlurb( $('#blurb-text')  );
+  var contactForm = new ContactForm( $('form#contact') );
+  var scrollUpBtn = new ScrollUpBtn( $('.blurb img')   );
 
   function initialize() {
     initScrollControls();
     onResize();
     $win.on({
-      load: onLoaded,
-      resize: onResize,
-      orientationchange: onOrientationChange
+      load              : onLoaded,
+      resize            : onResize,
+      orientationchange : onOrientationChange
     });
   }
 
@@ -48,7 +57,7 @@ var ScrollUpBtn = require('./components/ScrollUpBtn.js');
     for(var e in scenes) {
       var scene = scenes[e];
       scene.duration( getDurationForScene(e) );
-      scene.offset( getOffsetForScene(e) );
+      scene.offset(   getOffsetForScene(e)   );
     }
   }
 
@@ -57,31 +66,34 @@ var ScrollUpBtn = require('./components/ScrollUpBtn.js');
   }
 
   function addTouchSupport() {
+
     0 != window.scrollY && window.scrollTo(0, 0);
 
     touchScroll = new IScroll("#scroll-container", {
-      scrollX: false,
-      scrollY: true,
-      scrollbars: true,
-      useTransform: false,
-      useTransition: false,
-      probeType: 3,
-      tap: !0,
-      click: !0
+      scrollX       : false,
+      scrollY       : true,
+      scrollbars    : true,
+      useTransform  : false,
+      useTransition : false,
+      probeType     : 3,
+      tap           : !0,
+      click         : !0
     });
+
     scrollController.scrollPos(function() {
       return -touchScroll.y;
     });
+
     touchScroll.on("scroll", function() {
       scrollController.update()
     }),
+
     document.addEventListener("touchmove", function(e) {
       e.preventDefault()
     }, !1);
 
     scrollUpBtn.addTouchSupport(touchScroll);
 
-    // window.touchScroll = touchScroll;
   }
 
   /**
@@ -308,11 +320,21 @@ var ScrollUpBtn = require('./components/ScrollUpBtn.js');
     }
   };
 
+  /**
+   * Returns a duration in pixels as the length that the scene will scroll for
+   *
+   * @param {String} key - Key identifier for the scene ("home", "branding", etc..)
+   * @param {ScrollMagic.Scene} scene - Scene to add the animations to
+   * @param {Object} opts - Options object, some scene animation functions have required options (bgColor, a jQuery wrapped dom node..)
+   */
   function addSceneAnimationForType(key, scene, opts) {
     if(sceneAnimations.hasOwnProperty(key))
       sceneAnimations[key].call( this, scene, opts );
   }
 
+  /**
+   * Adds animations to each of the scenes
+   */
   function addSceneAnimations() {
 
     // Add animations for the home scene
@@ -332,6 +354,9 @@ var ScrollUpBtn = require('./components/ScrollUpBtn.js');
 
   }
 
+  /**
+   * Initializes the ScrollMagic controller, Scrollmagic scenes, adds them to the controller and then adds animations to each of the scenes
+   */
   function initScrollControls() {
 
     var headerHeight = getHeaderHeight();
@@ -339,12 +364,11 @@ var ScrollUpBtn = require('./components/ScrollUpBtn.js');
     scrollController = new ScrollMagic.Controller({
       container: $scrollContainer.get(0),
       globalSceneOptions: {
-        offset: -headerHeight,
-        duration: (window.innerHeight - headerHeight) * 3,
-        triggerHook: "onLeave",
-        offset: 1 //-headerHeight
-      },
-      logLevel : 3
+        offset      : -headerHeight,
+        duration    : (window.innerHeight - headerHeight) * 3,
+        triggerHook : "onLeave",
+        offset      : 1 //-headerHeight
+      }
     });
 
     scenes.home = new ScrollMagic.Scene({
@@ -391,10 +415,11 @@ var ScrollUpBtn = require('./components/ScrollUpBtn.js');
     ]);
 
     addSceneAnimations();
+
   }
 
   $(function(){
     initialize();
   });
 
-})(jQuery, Modernizr, ScrollMagic, IScroll, TweenMax, TimelineMax);
+})(Modernizr);

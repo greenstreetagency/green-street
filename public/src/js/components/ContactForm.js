@@ -1,3 +1,5 @@
+var $ = require('jquery');
+
 ContactForm = function($form){
 
   var self = this;
@@ -32,6 +34,12 @@ ContactForm = function($form){
 
   };
 
+  /**
+   * Validates the email input on the contact form
+   * adds error validation if the email doesn't pass the email regex match
+   *
+   * @return {bool} - Whether or not the email is valid
+   */
   this.validateEmail = function() {
     var valid =  ($inputEmail.val().match( emailRegex ) !== null);
 
@@ -42,6 +50,12 @@ ContactForm = function($form){
     return valid;
   };
 
+  /**
+   * Validates the message input on the contact form
+   * adds error validation if the message is a blank string
+   *
+   * @return {bool} - Whether or not the message is valid
+   */
   this.validateMessage = function() {
     var msg   = $inputMessage.val();
     var valid = !(!msg || /^\s*$/.test(msg)); // inside parens checks if string is blank
@@ -53,13 +67,24 @@ ContactForm = function($form){
     return valid;
   };
 
+  /**
+   * Does all required validation checks on the form.
+   *
+   * @return {bool} - Whether or not the entire form is valid
+   */
   this.validateForm = function(){
-    var messageValid = this.validateMessage();
-    var emailValid = this.validateEmail();
-    return messageValid && emailValid;
+    var vEmail   = this.validateEmail();
+    var vMessage = this.validateMessage()
+    return vEmail && vMessage;
   };
 
-  // Event Handlers
+  // EVENT HANDLERS
+
+  /**
+   * Handles AJAX submit of the form
+   *
+   * @param {Event} e - Form submit event
+   */
   this.onSubmit = function(e){
 
     var self = this;
@@ -67,29 +92,35 @@ ContactForm = function($form){
     if( this.validateForm() ){
 
         var params = {
-          email:   $inputEmail.val(),
-          message: $inputMessage.val(),
-          url:     $inputUrl.val()
+          url     : $inputUrl.val(),
+          email   : $inputEmail.val(),
+          message : $inputMessage.val()
         };
 
         $.ajax({
-            url: '/contact.php',
-            type: 'POST',
-            dataType: 'json',
-            data: params,
-            beforeSend: self.beforeSend
+            url        : '/contact.php',
+            type       : 'POST',
+            dataType   : 'json',
+            data       : params,
+            beforeSend : self.beforeSend
         })
         .done(function(data) {
           return data['success'] ? self.onSuccess() : self.onFailure();
         })
-        .fail( self.onFailure() );
+        .fail( self.onFailure );
     }
   };
 
+  /**
+   * Disables form before submitting
+   */
   this.beforeSend = function(){
     $inputSubmit.val( messages.sending ).prop('disabled', 'disabled');
   };
 
+  /**
+   * Resets the form on successful processing
+   */
   this.onSuccess = function(){
     $inputSubmit.val( messages.success );
 
@@ -105,6 +136,9 @@ ContactForm = function($form){
     }, 1500);
   };
 
+  /**
+   * Rests parts of the form when the form submit fails
+   */
   this.onFailure = function(){
     $inputSubmit.val( messages.failure ).prop('disabled', false);
 
@@ -112,6 +146,8 @@ ContactForm = function($form){
         $inputSubmit.val( inputSubmitDefault );
     }, 3000);
   };
+
+  // END EVENT HANDLERS
 
   // Kick it off
   initialize();

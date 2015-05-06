@@ -16,6 +16,12 @@ ScrollUpBtn = function($el) {
     return scrollTop / AUTO_SCROLL_SPEED;
   }
 
+  /**
+   * Add touch support to the button because touch screens use a scrollable element instead of the body
+   *
+   * @param {IScroll} scroll
+   * @return {self}
+   */
   this.addTouchSupport = function(scroll) {
     if( scroll instanceof IScroll ) {
       // touchScroll is real buggy :-/
