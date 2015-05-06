@@ -2,10 +2,3 @@
 @import "sections/clients";
 @import "sections/home";
 @import "sections/process";
-
-.section-title {
-  color: $gray-dark;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: $line-height-computed * 1.5;
-}

@@ -10,7 +10,6 @@
   background-color: transparentize($white, 0.05);
   .logo-image {
     height: $header-height-xs--usable;
-    width: auto;
   }
   .blurb {
     float: right;
@@ -23,8 +22,7 @@
     img {
       position: relative;
       height: $header-height-xs--usable - 4px;
-      width: auto;
-      margin-left: 10px;
+      margin-left: ($header-height-xs--usable - 4px) / 2;
       top: -2px;
     }
   }
@@ -41,7 +39,7 @@
       line-height: $header-height--usable;
       img {
         height: $header-height--usable - 12px;
-        margin-left: 20px;
+        margin-left: ($header-height--usable - 12px) / 2;
         top: -4px;
       }
     }

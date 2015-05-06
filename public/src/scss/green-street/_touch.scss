@@ -33,18 +33,8 @@
     -webkit-transition-duration: 0ms;
     left: 0px;
     top: 0px;
-
-    margin-top: $header-height-xs;
   }
   .footer {
     margin-bottom: 80px;
-  }
-}
-
-@media (min-width: $screen-sm-min) {
-  .touch {
-    .scroll-container-inner {
-      margin-top: $header-height;
-    }
   }
 }

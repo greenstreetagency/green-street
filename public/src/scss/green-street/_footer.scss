@@ -1,6 +1,8 @@
+$footer-element-padding: $grid-gutter-width / 2;
+
 .footer {
   position: relative;
-  padding: 15px 0;
+  padding: $footer-element-padding 0;
   background-color: $white;
 
   address {
@@ -18,7 +20,7 @@
 }
 
 .footer-links {
-  margin: 20px 0;
+  margin: $footer-element-padding 0;
   padding: 0;
   list-style: none;
   text-transform: uppercase;
@@ -42,15 +44,21 @@
   @include opacity(0.1);
 }
 
+@include retina-rule {
+  .footer-bg {
+    background-image: url(/img/leaf@2x.png);
+  }
+}
+
 @media (min-width: $screen-sm-min) {
   .footer address {
-    max-width: 200px - 15px;
+    max-width: 200px - $footer-element-padding;
     margin: 0 auto 0;
   }
   .footer-logo {
     max-width: 200px;
     margin: 0 auto;
-    margin-bottom: 15px;
+    margin-bottom: $footer-element-padding;
   }
   .footer-links {
     li {
@@ -60,11 +68,5 @@
   }
   .footer-bg {
     display: none;
-  }
-}
-
-@include retina-rule {
-  .footer-bg {
-    background-image: url(/img/leaf@2x.png);
   }
 }

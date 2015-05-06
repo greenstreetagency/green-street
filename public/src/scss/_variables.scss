@@ -2,30 +2,29 @@
 // Colors
 // ===============================================================================================
 
-$black:                          #000         !default;
-$gray-darker:            lighten(#000, 13.5%) !default; // #222
-$gray-dark:              lighten(#000, 20%)   !default; // #333
-$gray:                   lighten(#000, 33.5%) !default; // #555
-$gray-light:             lighten(#000, 46.7%) !default; // #777
-$gray-lighter:           lighten(#000, 70%)   !default; // #b3b3b3
-$gray-lighterer:         lighten(#000, 80%)   !default;
-$gray-lightest:          lighten(#000, 93.5%) !default; // #eee
-$white:                          #FFF         !default;
+$black:                           #000         !default;
+$gray-darker:             lighten(#000, 13.5%) !default; // #222
+$gray-dark:               lighten(#000, 20%)   !default; // #333
+$gray:                    lighten(#000, 33.5%) !default; // #555
+$gray-light:              lighten(#000, 46.7%) !default; // #777
+$gray-lighter:            lighten(#000, 70%)   !default; // #b3b3b3
+$gray-lighterer:          lighten(#000, 80%)   !default;
+$gray-lightest:           lighten(#000, 93.5%) !default; // #eee
+$white:                           #FFF         !default;
 
-$brand-primary: #0F6748 !default;
-
-$gs-blue:               #28ACE2 !default;
-$gs-teal:               #13A89E !default;
-$gs-magenta:            #9F1F63 !default;
+$brand-primary:           #0F6748 !default;
+$gs-blue:                 #28ACE2 !default;
+$gs-teal:                 #13A89E !default;
+$gs-magenta:              #9F1F63 !default;
 
 
 // Scaffolding
 // ===============================================================================================
 
-$body-bg:               $white !default;
-$text-color:            $black !default;
-$link-color:            $brand-primary !default;
-$link-hover-color:      darken($link-color, 8%) !default;
+$body-bg:                 $white !default;
+$text-color:              $black !default;
+$link-color:              $brand-primary !default;
+$link-hover-color:        darken($link-color, 8%) !default;
 
 
 // Typography

@@ -31,12 +31,11 @@ section {
   // min-height: 740px;
 }
 .slide {
-  positon: relative;
+  position: relative;
   height: 600px;
   width: 100%;
   left: 0;
   float: left;
-  // background-color: $white;
 
   &--fixed {
     position: fixed !important;
@@ -56,17 +55,10 @@ section {
   text-align: center;
 }
 
-.slide .v-center {
-  // margin-top: -$header-height-xs / 2;
-}
-
 @media (min-width: $screen-sm-min) {
   .slide {
     &--fixed {
       top: $header-height !important;
-    }
-    .v-center {
-      // margin-top: -$header-height / 2;
     }
   }
 }

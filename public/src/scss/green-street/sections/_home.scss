@@ -1,11 +1,15 @@
+.slide--home {
+  padding-top: $header-height-xs;
+}
+
 .home-bg {
   position: absolute;
   z-index: 0;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background-image: url(/img/home-bg.jpg);
+  top: -5px; // stretching the bg outside the viewport means we can blur this without getting a white border around it
+  left: -5px;
+  bottom: -5px;
+  right: -5px;
+  background-image: url(/img/home-bg-xs.jpg);
   background-size: cover;
   background-position: center 0;
 }
@@ -27,8 +31,20 @@
 }
 
 @media (min-width: $screen-sm-min) {
+  .slide--home {
+    padding-top: $header-height;
+  }
+  .home-bg {
+    background-image: url(/img/home-bg-sm.jpg);
+  }
   .home-tagline {
     top: -$header-height;
     font-size: 60px;
+  }
+}
+
+@media (min-width: $screen-md-min) {
+  .home-bg {
+    background-image: url(/img/home-bg.jpg);
   }
 }
