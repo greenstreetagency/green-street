@@ -1432,7 +1432,7 @@ input[type="button"].btn-block {
   display: block; }
 
 .footer-links {
-  margin: 20px 0;
+  margin: 15px 0;
   padding: 0;
   list-style: none;
   text-transform: uppercase;
@@ -1455,6 +1455,9 @@ input[type="button"].btn-block {
   opacity: 0.1;
   filter: alpha(opacity=10); }
 
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2 / 1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+  .footer-bg {
+    background-image: url(/img/leaf@2x.png); } }
 @media (min-width: 768px) {
   .footer address {
     max-width: 185px;
@@ -1471,9 +1474,6 @@ input[type="button"].btn-block {
 
   .footer-bg {
     display: none; } }
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2 / 1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
-  .footer-bg {
-    background-image: url(/img/leaf@2x.png); } }
 .header {
   z-index: 100;
   position: fixed;
@@ -1485,8 +1485,7 @@ input[type="button"].btn-block {
   background-color: #FFF;
   background-color: rgba(255, 255, 255, 0.95); }
   .header .logo-image {
-    height: 40px;
-    width: auto; }
+    height: 40px; }
   .header .blurb {
     float: right;
     font-family: 'Avenir';
@@ -1498,8 +1497,7 @@ input[type="button"].btn-block {
     .header .blurb img {
       position: relative;
       height: 36px;
-      width: auto;
-      margin-left: 10px;
+      margin-left: 18px;
       top: -2px; }
 
 @media (min-width: 768px) {
@@ -1512,7 +1510,7 @@ input[type="button"].btn-block {
       line-height: 56px; }
       .header .blurb img {
         height: 44px;
-        margin-left: 20px;
+        margin-left: 22px;
         top: -4px; } }
 .about-title {
   text-transform: uppercase;
@@ -1663,14 +1661,17 @@ input[type="button"].btn-block {
   .client-grid .grid-item {
     width: 25%;
     padding-bottom: 25%; } }
+.slide--home {
+  padding-top: 64px; }
+
 .home-bg {
   position: absolute;
   z-index: 0;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background-image: url(/img/home-bg.jpg);
+  top: -5px;
+  left: -5px;
+  bottom: -5px;
+  right: -5px;
+  background-image: url(/img/home-bg-xs.jpg);
   -webkit-background-size: cover;
   background-size: cover;
   background-position: center 0; }
@@ -1690,9 +1691,18 @@ input[type="button"].btn-block {
   text-align: center; }
 
 @media (min-width: 768px) {
+  .slide--home {
+    padding-top: 80px; }
+
+  .home-bg {
+    background-image: url(/img/home-bg-sm.jpg); }
+
   .home-tagline {
     top: -80px;
     font-size: 60px; } }
+@media (min-width: 992px) {
+  .home-bg {
+    background-image: url(/img/home-bg.jpg); } }
 .slide--process {
   background-color: #222222;
   color: #dddddd; }
@@ -1765,7 +1775,7 @@ input[type="button"].btn-block {
     display: block; } }
 @media (min-width: 768px) {
   .process-steps-inline {
-    max-width: 1200px;
+    max-width: 1170px;
     margin-left: auto;
     margin-right: auto; }
     .process-steps-inline img {
@@ -1788,23 +1798,6 @@ input[type="button"].btn-block {
 
   .process-step-descriptions {
     font-size: 21px; } }
-.section-title {
-  color: #333333;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 27px; }
-
-.sidebar {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 80px;
-  z-index: 10;
-  top: 64px;
-  background-color: green;
-  display: none; }
-
 .touch html,
 .touch body {
   overflow: hidden; }
@@ -1834,14 +1827,10 @@ input[type="button"].btn-block {
   transition-duration: 0ms;
   -webkit-transition-duration: 0ms;
   left: 0px;
-  top: 0px;
-  margin-top: 64px; }
+  top: 0px; }
 .touch .footer {
   margin-bottom: 80px; }
 
-@media (min-width: 768px) {
-  .touch .scroll-container-inner {
-    margin-top: 80px; } }
 body {
   margin: 0 auto;
   height: 100%; }
@@ -1855,7 +1844,7 @@ body {
     clear: both; }
 
 .slide {
-  positon: relative;
+  position: relative;
   height: 600px;
   width: 100%;
   left: 0;
