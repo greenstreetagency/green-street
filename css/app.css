@@ -1488,8 +1488,22 @@ input[type="button"].btn-block {
   padding: 12px 15px;
   background-color: #FFF;
   background-color: rgba(255, 255, 255, 0.95); }
-  .header .logo-image {
-    height: 40px; }
+  .header-logo {
+    display: inline-block;
+    float: left;
+    height: 40px;
+    width: 100px; }
+    .header-logo--image {
+      background-image: url(/img/logo-green-header.png);
+      background-repeat: no-repeat;
+      -webkit-background-size: auto 40px;
+      background-size: auto 40px; }
+    .header-logo--svg {
+      display: none; }
+      .header-logo--svg path,
+      .header-logo--svg polygon,
+      .header-logo--svg rect {
+        fill: #0e5e42; }
   .header .blurb {
     float: right;
     font-family: 'Avenir';
@@ -1504,11 +1518,18 @@ input[type="button"].btn-block {
       margin-left: 9px;
       top: -2px; }
 
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2 / 1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+  .header-logo--image {
+    background-image: url(/img/logo-green-header@2x.png); } }
 @media (min-width: 768px) {
   .header {
     height: 80px; }
-    .header .logo-image {
-      height: 56px; }
+    .header-logo {
+      height: 56px;
+      width: 140px; }
+      .header-logo--image {
+        -webkit-background-size: auto 56px;
+        background-size: auto 56px; }
     .header .blurb {
       font-size: 16px;
       line-height: 56px; }
@@ -1516,6 +1537,11 @@ input[type="button"].btn-block {
         height: 44px;
         margin-left: 22px;
         top: -4px; } }
+.svg .header-logo--image {
+  display: none; }
+.svg .header-logo--svg {
+  display: inline-block; }
+
 .about-title {
   text-transform: uppercase;
   font-family: "Avenir";
