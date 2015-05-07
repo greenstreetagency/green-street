@@ -383,6 +383,7 @@ var ScrollUpBtn = require('./components/ScrollUpBtn.js');
     })
     .setPin("#branding")
     .on("enter", function(e){
+      // console.log(e);
       // headerBlurb.setText('What We Do');
     })
     .on("leave", function(e){

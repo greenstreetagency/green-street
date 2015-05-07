@@ -8,8 +8,27 @@
   padding: $header-padding-vertical $header-padding-horizontal;
   background-color: $white;
   background-color: transparentize($white, 0.05);
-  .logo-image {
+  &-logo {
+    display: inline-block;
+    float: left;
     height: $header-height-xs--usable;
+    width: $header-height-xs--usable * 2.5;
+    &--image {
+      background-image: url(/img/logo-green-header.png);
+      background-repeat: no-repeat;
+      background-size: auto $header-height-xs--usable;
+    }
+    &--svg {
+      display: none;
+      path,
+      polygon,
+      rect {
+        fill: darken($brand-primary, 2%);
+      }
+      .logo-svg-border {
+
+      }
+    }
   }
   .blurb {
     float: right;
@@ -28,11 +47,21 @@
   }
 }
 
+@include retina-rule {
+  .header-logo--image {
+    background-image: url(/img/logo-green-header@2x.png);
+  }
+}
+
 @media (min-width: $screen-sm-min) {
   .header {
     height: $header-height;
-    .logo-image {
+    &-logo {
       height: $header-height--usable;
+      width: $header-height--usable * 2.5;
+      &--image {
+        background-size: auto $header-height--usable;
+      }
     }
     .blurb {
       font-size: $font-size-large;
@@ -43,5 +72,15 @@
         top: -4px;
       }
     }
+  }
+}
+
+// SVG supported
+.svg {
+  .header-logo--image {
+    display: none;
+  }
+  .header-logo--svg {
+    display: inline-block;
   }
 }
