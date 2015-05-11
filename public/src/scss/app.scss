@@ -30,10 +30,35 @@ body {
   width: 100%;
   left: 0;
   float: left;
+  overflow: hidden;
 
   &--fixed {
     position: fixed !important;
     top: $header-height-xs !important;
+  }
+}
+
+.slide-content {
+  @include size(100%, 100%);
+  position: relative;
+  z-index: 1;
+}
+
+.slide-background {
+  position: absolute;
+  top: -50%;
+  left: 0;
+  right: 0;
+  height: 200%;
+  @include opacity(0.1);
+  &--phone {
+    background-image: url(/img/bg/phone.png);
+  }
+  &--touch {
+    background-image: url(/img/bg/touch.png);
+  }
+  &--executions {
+    background-image: url(/img/bg/executions.png);
   }
 }
 

@@ -1,10 +1,11 @@
 var gulp        = require('gulp');
-var sass        = require('gulp-ruby-sass');
+var sass        = require('gulp-sass');
 var plumber     = require('gulp-plumber');
 var prefix      = require('gulp-autoprefixer');
 var notify      = require('gulp-notify');
 var refresh     = require('gulp-livereload');
 var rename      = require('gulp-rename');
+var uglify      = require('gulp-uglify');
 
 module.exports = function(){
 
@@ -13,6 +14,7 @@ module.exports = function(){
     .pipe(sass())
     .pipe(prefix('last 1 version', '> 1%', 'ie 8', 'ie 7'))
     .on('error', notify.onError())
+    // .pipe(uglify())
     .pipe(gulp.dest('public/dist/css'))
     .on('end', function (){
         if( global.lrserver ) {

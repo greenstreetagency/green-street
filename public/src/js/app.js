@@ -45,8 +45,6 @@ var ScrollUpBtn = require('./components/ScrollUpBtn.js');
     if(touchEnabled)
       setTimeout(addTouchSupport, 200);
 
-    Modernizr.pointerevents = true;
-
     Modernizr.pointerevents || $slides.on("mousewheel DOMMouseScroll", function(e) {
         $scrollContainer.scrollTop($scrollContainer.scrollTop() - (e.originalEvent.wheelDelta || 10 * -e.originalEvent.detail))
     });
@@ -126,7 +124,7 @@ var ScrollUpBtn = require('./components/ScrollUpBtn.js');
         duration = 3;
     }
 
-    return duration * window.innerHeight;
+    return duration * window.innerHeight * 5;
   }
 
   /**
@@ -287,38 +285,70 @@ var ScrollUpBtn = require('./components/ScrollUpBtn.js');
 
     },
     about : function( scene, opts ) {
-      var bgColor = opts.bgColor;
-      var $slide  = opts.$slide
-      var $slides = $slide.find('.about-step');
-      var tL      = new TimelineMax();
+      var bgColor        = opts.bgColor;
+      var $slide         = opts.$slide
+      var $slides        = $slide.find('.about-step');
+      var bg             = $slide.find('.slide-background').get(0);
+      var tL             = new TimelineMax();
+      var tLBackground   = new TimelineMax();
 
-      var $first = $slides.first();
-      var $remaining = $slides.slice(1);
+      var $first         = $slides.first();
+      var $remaining     = $slides.slice(1);
       var remainingCount = $remaining.size();
 
-      tL.add(TweenMax.to($first.get(0), 1, {
-        alpha: 0
-      }));
+      TweenMax.set(bg, {
+        alpha: 0,
+        y: "40%"
+      });
+
+      tL.add([
+        TweenMax.to($first.get(0), 1, {
+          alpha: 0
+        })
+      ]);
 
       $remaining
       .css({'opacity' : 0})
       .each(function(i, el){
 
         var yoyo = (i + 1 != remainingCount);
-
         tL.add(TweenMax.to(el, 1, {
-          alpha: 1,
-          yoyo: yoyo,
-          repeat: (yoyo ? 1 : 0)
+          alpha  : 1,
+          yoyo   : yoyo,
+          repeat : (yoyo ? 1 : 0)
         }));
 
       });
 
       tL.add(TweenMax.to($slide.get(0), 1, {
         backgroundColor : bgColor
-      }), "-=0.5");
+      }));
+
+      // The number of slides determines the length of the scene timeline
+      // Now we make another timeline for the background and add it to the scene timeline
+      var tLDuration = tL.duration();
+
+      tLBackground.add(
+        TweenMax.to(bg, (tLDuration / 2), {
+          alpha : 0.1,
+          y     : "0%",
+          ease  : Power1.easeOut
+        })
+      );
+
+      tLBackground.add(
+        TweenMax.to(bg, (tLDuration / 2), {
+          alpha : 0,
+          y     : "-40%",
+          ease  : Power1.easeInOut
+        })
+      );
+
+      // Add the background timeline to the other background, and make them start at the same time
+      tL.add(tLBackground, "-=" + tLDuration);
 
       scene.setTween(tL);
+
     }
   };
 

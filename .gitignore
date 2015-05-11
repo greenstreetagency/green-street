@@ -13,7 +13,8 @@ node_modules/gulp-notify
 node_modules/gulp-plumber
 node_modules/gulp-preprocess
 node_modules/gulp-rename
-node_modules/gulp-ruby-sass
+node_modules/gulp-sass
+node_modules/gulp-sourcemaps
 node_modules/gulp-uglify
 node_modules/multipipe
 node_modules/reactify
