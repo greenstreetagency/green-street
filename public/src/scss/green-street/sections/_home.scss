@@ -31,6 +31,55 @@
   text-align: center;
 }
 
+@keyframes scroll-tickle-bounce {
+  0%, 100%  { transform: translateY(0%); }
+  50%       { transform: translateY(5px); }
+}
+
+@-webkit-keyframes scroll-tickle-bounce {
+  0%, 100%  { -webkit-transform: translateY(0%); }
+  50%       { -webkit-transform: translateY(5px); }
+}
+
+.home-scroll-tickle {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: 20px;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: $font-size-h4;
+  letter-spacing: 2px;
+  font-weight: bold;
+
+  a {
+    display: inline-block;
+    width: 300px;
+    padding-bottom: 10px;
+    color: $black;
+    @include opacity(0.5);
+    will-change: transform;
+    transition: opacity 200ms ease-out;
+    img {
+     display: block;
+     position: relative;
+     width: 80px;
+     height: 24px;
+     margin: 10px auto 0;
+    }
+    &:hover {
+        @include opacity(1);
+        transition: opacity 200ms ease-out;
+      // img {
+        animation-name: scroll-tickle-bounce;
+        animation-duration: 0.8s;
+        animation-iteration-count: infinite;
+        animation-timing-function: cubic-bezier(0.46, 0.03, 0.52, 0.96); // in out quadratic
+      // }
+    }
+  }
+}
+
 @media (min-width: $screen-sm-min) {
   .slide--home {
     padding-top: $header-height;

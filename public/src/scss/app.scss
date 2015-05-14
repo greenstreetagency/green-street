@@ -51,6 +51,9 @@ body {
   right: 0;
   height: 200%;
   @include opacity(0.1);
+  background-position: center center;
+  background-size: 256px;
+  background-repeat: repeat repeat;
   &--phone {
     background-image: url(/img/bg/phone.png);
   }
@@ -58,7 +61,27 @@ body {
     background-image: url(/img/bg/touch.png);
   }
   &--executions {
-    background-image: url(/img/bg/executions.png);
+    background-image: url(/img/bg/plane@2x.png);
+  }
+  &--licensing {
+    background-image: url(/img/bg/email2.png);
+  }
+}
+
+@include retina-rule {
+  .slide-background {
+    &--phone {
+      background-image: url(/img/bg/phone@2x.png);
+    }
+    &--touch {
+      background-image: url(/img/bg/touch@2x.png);
+    }
+    &--executions {
+      background-image: url(/img/bg/plane@2x.png);
+    }
+    &--licensing {
+      background-image: url(/img/bg/email2@2x.png);
+    }
   }
 }
 

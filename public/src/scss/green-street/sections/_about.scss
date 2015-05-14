@@ -69,6 +69,9 @@
   &--executions {
     background-color: lighten($gs-magenta, 10%);
   }
+  &--licensing {
+    background-color: lighten($gs-orange, 10%);
+  }
 }
 
 @media (min-width: $screen-sm-min) {

@@ -1481,6 +1481,9 @@ input[type="button"].btn-block {
 .slide--executions {
   background-color: #ca277e; }
 
+.slide--licensing {
+  background-color: #d8b973; }
+
 @media (min-width: 768px) {
   .about-circle {
     width: 400px;
@@ -1494,6 +1497,18 @@ input[type="button"].btn-block {
 #clients:after {
   clear: both; }
 
+/* SAMPLE MARKUP
+<div class="grid-item">
+  <div class="grid-item-inner">
+    <div class="grid-item-info-container">
+      <div class="grid-item-info">
+        <div class="grid-item-title">Client 1</div>
+      </div>
+    </div>
+  </div>
+  <div class="grid-item-bg" style="background-image: url(/img/clients/3.jpg)"></div>
+</div>
+*/
 .client-grid .grid-item {
   position: relative;
   float: left;
@@ -1549,7 +1564,7 @@ input[type="button"].btn-block {
   left: 0;
   bottom: 0;
   right: 0;
-  background-position: center;
+  background-position: center 25%;
   -webkit-background-size: cover;
   background-size: cover; }
 
@@ -1575,7 +1590,9 @@ input[type="button"].btn-block {
 @media (min-width: 768px) {
   .client-grid .grid-item {
     width: 25%;
-    padding-bottom: 25%; } }
+    padding-bottom: 25%; }
+  .client-grid .grid-item-bg {
+    background-position: center; } }
 
 .slide--home {
   padding-top: 64px;
@@ -1606,6 +1623,60 @@ input[type="button"].btn-block {
   color: #000;
   font-weight: bold;
   text-align: center; }
+
+@keyframes scroll-tickle-bounce {
+  0%, 100% {
+    -webkit-transform: translateY(0%);
+    transform: translateY(0%); }
+  50% {
+    -webkit-transform: translateY(5px);
+    transform: translateY(5px); } }
+
+@-webkit-keyframes scroll-tickle-bounce {
+  0%, 100% {
+    -webkit-transform: translateY(0%); }
+  50% {
+    -webkit-transform: translateY(5px); } }
+
+.home-scroll-tickle {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: 20px;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 18px;
+  letter-spacing: 2px;
+  font-weight: bold; }
+  .home-scroll-tickle a {
+    display: inline-block;
+    width: 300px;
+    padding-bottom: 10px;
+    color: #000;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+    will-change: transform;
+    -webkit-transition: opacity 200ms ease-out;
+    transition: opacity 200ms ease-out; }
+    .home-scroll-tickle a img {
+      display: block;
+      position: relative;
+      width: 80px;
+      height: 24px;
+      margin: 10px auto 0; }
+    .home-scroll-tickle a:hover {
+      opacity: 1;
+      filter: alpha(opacity=100);
+      -webkit-transition: opacity 200ms ease-out;
+      transition: opacity 200ms ease-out;
+      -webkit-animation-name: scroll-tickle-bounce;
+      animation-name: scroll-tickle-bounce;
+      -webkit-animation-duration: 0.8s;
+      animation-duration: 0.8s;
+      -webkit-animation-iteration-count: infinite;
+      animation-iteration-count: infinite;
+      -webkit-animation-timing-function: cubic-bezier(0.46, 0.03, 0.52, 0.96);
+      animation-timing-function: cubic-bezier(0.46, 0.03, 0.52, 0.96); }
 
 @media (min-width: 768px) {
   .slide--home {
@@ -1716,7 +1787,9 @@ input[type="button"].btn-block {
 
 .section-title {
   text-transform: uppercase;
-  letter-spacing: 1px; }
+  letter-spacing: 1px;
+  margin-top: 0;
+  margin-bottom: 36px; }
 
 .touch html,
 .touch body {
@@ -1750,6 +1823,9 @@ input[type="button"].btn-block {
   -webkit-transition-duration: 0ms;
   left: 0px;
   top: 0px; }
+
+.touch .home-scroll-tickle {
+  display: none !important; }
 
 .touch .footer {
   margin-bottom: 80px; }
@@ -1791,13 +1867,29 @@ body {
   right: 0;
   height: 200%;
   opacity: 0.1;
-  filter: alpha(opacity=10); }
+  filter: alpha(opacity=10);
+  background-position: center center;
+  -webkit-background-size: 256px;
+  background-size: 256px;
+  background-repeat: repeat repeat; }
   .slide-background--phone {
     background-image: url(/img/bg/phone.png); }
   .slide-background--touch {
     background-image: url(/img/bg/touch.png); }
   .slide-background--executions {
-    background-image: url(/img/bg/executions.png); }
+    background-image: url(/img/bg/plane@2x.png); }
+  .slide-background--licensing {
+    background-image: url(/img/bg/email2.png); }
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+  .slide-background--phone {
+    background-image: url(/img/bg/phone@2x.png); }
+  .slide-background--touch {
+    background-image: url(/img/bg/touch@2x.png); }
+  .slide-background--executions {
+    background-image: url(/img/bg/plane@2x.png); }
+  .slide-background--licensing {
+    background-image: url(/img/bg/email2@2x.png); } }
 
 .v-center {
   display: table;

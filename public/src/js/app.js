@@ -5,13 +5,14 @@ var ScrollMagic = require('scrollmagic');
 var IScroll     = require('iscroll-probe');
 var TweenMax    = require('tween-max');
 
+window.jQuery   = $; // Expose jQuery globally for plugins
                   require('./components/jquery.SvOverlay.js'); // $.fn.overlay
+                  require('jquery.easing');
 
 // Components
-var HeaderBlurb = require('./components/HeaderBlurb.js');
-var ContactForm = require('./components/ContactForm.js');
-var ScrollUpBtn = require('./components/ScrollUpBtn.js');
-
+var HeaderBlurb        = require('./components/HeaderBlurb.js');
+var ContactForm        = require('./components/ContactForm.js');
+var ScrollUpBtn        = require('./components/ScrollUpBtn.js');
 
 // App Code
 (function(Modernizr, undefined){
@@ -26,13 +27,17 @@ var ScrollUpBtn = require('./components/ScrollUpBtn.js');
   var scrollController;
   var scenes = {};
   var touchScroll; // IScroll instance
+  var isFirefox   = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
+  var isSafari = -1 != navigator.userAgent.indexOf("Safari") && -1 == navigator.userAgent.indexOf("Chrome");
 
-  var headerBlurb = new HeaderBlurb( $('#blurb-text')  );
-  var contactForm = new ContactForm( $('form#contact') );
-  var scrollUpBtn = new ScrollUpBtn( $('.blurb img')   );
+
+  var headerBlurb      = new HeaderBlurb( $('#blurb-text')  );
+  var contactForm      = new ContactForm( $('form#contact') );
+  var scrollUpBtn      = new ScrollUpBtn( $('.blurb img')   );
 
   function initialize() {
     initScrollControls();
+    addScrollDownArrow();
     onResize();
     $win.on({
       load              : onLoaded,
@@ -41,9 +46,17 @@ var ScrollUpBtn = require('./components/ScrollUpBtn.js');
     });
   }
 
+  function addScrollDownArrow() {
+    $('.home-scroll-tickle a').on('click', function(){
+      scrollController.scrollTo(scenes.branding);
+      return false;
+    });
+  }
+
   function onLoaded() {
-    if(touchEnabled)
+    if(touchEnabled) {
       setTimeout(addTouchSupport, 200);
+    }
 
     Modernizr.pointerevents || $slides.on("mousewheel DOMMouseScroll", function(e) {
         $scrollContainer.scrollTop($scrollContainer.scrollTop() - (e.originalEvent.wheelDelta || 10 * -e.originalEvent.detail))
@@ -75,32 +88,56 @@ var ScrollUpBtn = require('./components/ScrollUpBtn.js');
       useTransition : false,
       probeType     : 3,
       tap           : !0,
-      click         : !0
+      click         : !0,
+      deceleration  : 0.001
     });
 
     scrollController.scrollPos(function() {
       return -touchScroll.y;
     });
 
-    touchScroll.on("scroll", function() {
-      scrollController.update()
-    }),
+    touchScroll.on("scroll", scrollController.update),
 
     document.addEventListener("touchmove", function(e) {
       e.preventDefault()
     }, !1);
+
+    scrollController.scrollTo(function(top){
+      touchScroll.scrollTo(0, top, 1000);
+    });
 
     scrollUpBtn.addTouchSupport(touchScroll);
 
   }
 
   /**
-   *  Returns the outer height of the header
+   * Returns the outer height of the header
    *
    * @returns {Number}
    */
   function getHeaderHeight() {
     return $header.get(0).clientHeight;
+  }
+
+  /**
+   * Returns the prefix for the current browser
+   *
+   * @returns {Number}
+   */
+  function getVendorPrefixForProp(prop) {
+    var prefixes  = ['Moz','Webkit','Khtml','O','ms'];
+    var style     = document.createElement('div').style;
+    var upper     = prop.charAt(0).toUpperCase() + prop.slice(1);
+    var vendorP   = '';
+
+    for (var i = prefixes.length - 1; i >= 0; i--) {
+      var prefix = prefixes[i];
+      if( (prefix + upper) in style) {
+        vendorP = '-' + prefix.toLowerCase() + '-';
+      }
+    };
+
+    return vendorP;
   }
 
   /**
@@ -115,16 +152,21 @@ var ScrollUpBtn = require('./components/ScrollUpBtn.js');
       case "branding":
       case "touchPoints":
       case "executions":
-        duration = 5;
+      case "licensing":
+        duration = 6;
         break;
       case "process":
-        duration = 6; // num slides
+        duration = 6;
+        break;
+      case "home":
+        duration = 4;
         break;
       default:
-        duration = 3;
+        // duration = 5;
+        duration = 0;
     }
 
-    return duration * window.innerHeight * 5;
+    return duration * window.innerHeight;
   }
 
   /**
@@ -134,16 +176,26 @@ var ScrollUpBtn = require('./components/ScrollUpBtn.js');
    * @returns {Number}
    */
   function getOffsetForScene(sceneKey) {
-    // var headerHeight = getHeaderHeight();
-    return sceneKey == "home" ? 0 : -getHeaderHeight();  //???
-    // return -getHeaderHeight();
+    return sceneKey == "home" ? 0 : -getHeaderHeight();
+  }
+
+  /**
+   * Scrolls the content to a passed in offset
+   *
+   * @param {Number} pixel offset to scroll to
+   */
+  function scrollToOffset(e) {
+    touchScroll ? touchScroll.scrollTo(0, -e, 1e3) : isSafari ? scrollContainer.scrollTop(e) : TweenMax.to(scrollContainer, 1, {
+        scrollTo: {
+            y: e
+        }
+    });
   }
 
   /**
    * Adjusts slide height to ensure that they take up the full viewport height minus the header height
    */
   function adjustSlideDimensions() {
-    // $slides.height( window.innerHeight - getHeaderHeight() );
     $slides.height( window.innerHeight - getHeaderHeight() );
   }
 
@@ -152,14 +204,14 @@ var ScrollUpBtn = require('./components/ScrollUpBtn.js');
   var sceneAnimations = {
     home : function( scene ) {
       var blurAmount  = { a : 3 }; // Starts blur at 3px
+      var filterProp  = getVendorPrefixForProp('filter') + 'filter'; // returns '-webkit-filter', '-moz-filter' etc..
       var tL          = new TimelineMax();
       var tweenGroup  = [];
 
       var applyBlur = function() {
-        TweenMax.set('.home-bg', {
-          webkitFilter : "blur(" + blurAmount.a + "px)",
-          filter       : "blur(" + blurAmount.a + "px)"
-        })
+        var blur = {};
+            blur[filterProp] = "blur(" + blurAmount.a + "px)";
+        TweenMax.set('.home-bg', blur );
       }
 
       TweenMax.set('#home-tagline-2', {
@@ -209,11 +261,11 @@ var ScrollUpBtn = require('./components/ScrollUpBtn.js');
       $processDescriptions.css( {'opacity' : 0}   )
 
       for (var i = 0; i < processStepCount; i++) {
-        var stepInline = $processStepsInline[i];
-        var stepAbs = $processStepsAbs[i];
-        var stepAbsImg = $(stepAbs).find('img').first();
+        var stepInline      = $processStepsInline[i];
+        var stepAbs         = $processStepsAbs[i];
+        var stepAbsImg      = $(stepAbs).find('img').first();
         var stepDescription = $processDescriptions[i];
-        var lastStep = (i == processStepCount - 1);
+        var lastStep        = (i == processStepCount - 1);
 
         var tweenGroups = {
           first  : [],
@@ -298,14 +350,14 @@ var ScrollUpBtn = require('./components/ScrollUpBtn.js');
 
       TweenMax.set(bg, {
         alpha: 0,
-        y: "40%"
+        y: "20%"
       });
 
-      tL.add([
+      tL.add(
         TweenMax.to($first.get(0), 1, {
           alpha: 0
-        })
-      ]);
+        }), '+=3'
+      );
 
       $remaining
       .css({'opacity' : 0})
@@ -320,27 +372,30 @@ var ScrollUpBtn = require('./components/ScrollUpBtn.js');
 
       });
 
-      tL.add(TweenMax.to($slide.get(0), 1, {
-        backgroundColor : bgColor
-      }));
-
       // The number of slides determines the length of the scene timeline
-      // Now we make another timeline for the background and add it to the scene timeline
+      // so store it as a var to use later
       var tLDuration = tL.duration();
 
+      // Adjust the background color over the full duration of the timeline
+      tL.add(TweenMax.to($slide.get(0), tLDuration, {
+        backgroundColor : bgColor
+      }), "-=" + tLDuration);
+
+
+      // Now we make another timeline for the background
       tLBackground.add(
         TweenMax.to(bg, (tLDuration / 2), {
           alpha : 0.1,
           y     : "0%",
-          ease  : Power1.easeOut
+          ease  : Power0.easeNone
         })
       );
 
       tLBackground.add(
         TweenMax.to(bg, (tLDuration / 2), {
           alpha : 0,
-          y     : "-40%",
-          ease  : Power1.easeInOut
+          y     : "-20%",
+          ease  : Power0.easeNone
         })
       );
 
@@ -379,7 +434,10 @@ var ScrollUpBtn = require('./components/ScrollUpBtn.js');
     addSceneAnimationForType( 'about', scenes.touchPoints, { bgColor : '#CA277E', $slide : $('#touch-points.slide')  } );
 
     // Executions Section
-    addSceneAnimationForType( 'about', scenes.executions, { bgColor : '#222', $slide : $('#executions.slide')  } );
+    addSceneAnimationForType( 'about', scenes.executions, { bgColor : '#D8B973', $slide : $('#executions.slide')  } );
+
+    // Licensing Section
+    addSceneAnimationForType( 'about', scenes.licensing, { bgColor : '#222', $slide : $('#licensing.slide')  } );
 
     // Add animations for the process scene
     addSceneAnimationForType( 'process', scenes.process );
@@ -397,10 +455,17 @@ var ScrollUpBtn = require('./components/ScrollUpBtn.js');
       container: $scrollContainer.get(0),
       globalSceneOptions: {
         offset      : -headerHeight,
-        duration    : (window.innerHeight - headerHeight) * 3,
+        duration    : getDurationForScene(),
         triggerHook : "onLeave",
         offset      : 1 //-headerHeight
       }
+    });
+
+    // Add an easing function for when we can scrollController.scrollTo
+    scrollController.scrollTo(function(top){
+      $(isFirefox ? 'html' : 'body').animate({
+       scrollTop: top
+      }, 1000, 'easeInOutCirc');
     });
 
     scenes.home = new ScrollMagic.Scene({
@@ -411,15 +476,7 @@ var ScrollUpBtn = require('./components/ScrollUpBtn.js');
     scenes.branding = new ScrollMagic.Scene({
       triggerElement: '#branding'
     })
-    .setPin("#branding")
-    .on("enter", function(e){
-      // console.log(e);
-      // headerBlurb.setText('What We Do');
-    })
-    .on("leave", function(e){
-      // if(e.scrollDirection == "REVERSE")
-      //   headerBlurb.setText('Creative Cannabis Agency');
-    });
+    .setPin("#branding");
 
     scenes.touchPoints = new ScrollMagic.Scene({
       triggerElement: '#touch-points'
@@ -431,31 +488,18 @@ var ScrollUpBtn = require('./components/ScrollUpBtn.js');
     })
     .setPin("#executions");
 
+    scenes.licensing = new ScrollMagic.Scene({
+      triggerElement: '#licensing'
+    })
+    .setPin("#licensing");
+
     scenes.process = new ScrollMagic.Scene({
       triggerElement: '#process'
     })
-    .setPin("#process")
-    .on("enter", function(e){
-      // console.log('enter process section');
-      // console.log(e);
-      // headerBlurb.setText('Our Process');
-    })
-    .on("leave", function(e){
-      // if(e.scrollDirection == "REVERSE")
-      //   headerBlurb.setText('What We Do');
-    });
+    .setPin("#process");
 
     scenes.clients = new ScrollMagic.Scene({
       triggerElement: '#clients'
-    })
-    .on("enter", function(e){
-      // headerBlurb.setText('Clients');
-    })
-    .on("leave", function(e){
-      // console.log('leave clients');
-      // console.log(e);
-      // if(e.scrollDirection == "REVERSE")
-      //   headerBlurb.setText('Our Process');
     });
 
     scenes.footer = new ScrollMagic.Scene({
@@ -468,6 +512,7 @@ var ScrollUpBtn = require('./components/ScrollUpBtn.js');
       scenes.branding,
       scenes.touchPoints,
       scenes.executions,
+      scenes.licensing,
       scenes.clients,
       scenes.footer
     ]);
