@@ -6,7 +6,11 @@ var preprocess  = require('gulp-preprocess');
 module.exports = function () {
   return gulp.src([
     'public/src/**/*.html',
-    '!public/src/partials{,/**}'
+    '!public/src/partials{,/**}',
+    'public/src/.htaccess',
+    'public/src/crossdomain.xml',
+    'public/src/humans.txt',
+    'public/src/robots.txt',
     ])
     .pipe(fileInclude({
       prefix: '@@',
