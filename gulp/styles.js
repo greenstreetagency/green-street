@@ -5,7 +5,7 @@ var prefix      = require('gulp-autoprefixer');
 var notify      = require('gulp-notify');
 var refresh     = require('gulp-livereload');
 var rename      = require('gulp-rename');
-var uglify      = require('gulp-uglify');
+var minCSS      = require('gulp-minify-css');
 
 module.exports = function(){
 
@@ -14,7 +14,7 @@ module.exports = function(){
     .pipe(sass())
     .pipe(prefix('last 1 version', '> 1%', 'ie 8', 'ie 7'))
     .on('error', notify.onError())
-    // .pipe(uglify())
+    .pipe(minCSS())
     .pipe(gulp.dest('public/dist/css'))
     .on('end', function (){
         if( global.lrserver ) {
