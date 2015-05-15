@@ -31,7 +31,6 @@ SvOverlay.prototype.show = function(){
   }.bind(this) // this overlay
 
   var e = $.Event('show.overlay', { target: self.$element });
-
   this.$element.trigger(e);
 
   if (this.isShown) return;
@@ -63,6 +62,8 @@ SvOverlay.prototype.show = function(){
 SvOverlay.prototype.hide = function(e){
 
   var onComplete = function(){
+    console.log(this);
+    window.ele = this.$element;
     this.$element.hide();
     this.$element.trigger('hidden.overlay');
   }.bind(this);

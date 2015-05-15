@@ -4,6 +4,7 @@ var ScrollMagic = require('scrollmagic');
                   require('scrollmagic-gsap');
 var IScroll     = require('iscroll-probe');
 var TweenMax    = require('tween-max');
+var FastClick   = require('fastclick');
 
 window.jQuery   = $; // Expose jQuery globally for plugins
                   require('./components/jquery.SvOverlay.js'); // $.fn.overlay
@@ -98,7 +99,7 @@ var ScrollUpBtn        = require('./components/ScrollUpBtn.js');
 
     touchScroll.on("scroll", scrollController.update),
 
-    document.getElementById("#scroll-container").addEventListener("touchmove", function(e) {
+    document.getElementById("scroll-container").addEventListener("touchmove", function(e) {
       e.preventDefault()
     }, !1);
 
@@ -107,6 +108,11 @@ var ScrollUpBtn        = require('./components/ScrollUpBtn.js');
     });
 
     scrollUpBtn.addTouchSupport(touchScroll);
+
+    FastClick(document.body);
+
+    $('.overlay').on('shown.overlay', touchScroll.disable );
+    $('.overlay').on('hidden.overlay', touchScroll.enable );
 
   }
 

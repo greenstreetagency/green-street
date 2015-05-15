@@ -31,6 +31,8 @@
   top: 15px;
   right: 15px;
   overflow: hidden;
+  -webkit-backface-visibility: hidden; // Fixes mobile safari jitter
+  transform: translateZ(0);
   @include square(35px);
 
   font-size: 50px;
