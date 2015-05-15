@@ -1,12 +1,21 @@
+//
+// Overlays
+// ------------------------------------------------------------------
+
+// .overlay-open              - body class for killing the scroll
+// .overlay                   - container to scroll within
+// .overlay-content-container
+// .overlay-content 
+
 .overlay {
   display: none;
+  overflow: hidden;
   position: fixed;
   top: 0;
   bottom: 0;
   right: 0;
   left: 0;
   z-index: $z-index-overlay;
-  overflow: hidden;
   -webkit-overflow-scrolling: touch;
 
   background: darken($brand-primary, 10%);
@@ -18,14 +27,14 @@
 .overlay-close {
   cursor: pointer;
   z-index: 1;
-  position: absolute;
-  top: 5%;
-  right: 5%;
+  position: fixed;
+  top: 15px;
+  right: 15px;
   overflow: hidden;
-  @include square(50px);
+  @include square(35px);
 
-  font-size: 70px;
-  line-height: 50px;
+  font-size: 50px;
+  line-height: 35px;
   text-align: center;
   color: $white;
   transition: all 200ms ease-in-out;
@@ -33,15 +42,15 @@
   &:focus {
     color: $white;
     text-shadow: 0 0 10px mix($white, $black, 50%);
-    // text-shadow: 0 0 10px transparentize($white, 0.5);
     transform: scale(1.05);
     transition: all 200ms ease-in-out;
   }
 }
 
 .overlay-content-container {
-  height: 100%;
   width: 100%;
+  min-height: 100%;
+  padding: 0 (20px + 35px); // to clear the close button
   // Use this to vertically center all the content in the overlay
   display: box;
   display: -webkit-flex;
@@ -69,6 +78,9 @@
 }
 
 .overlay-content {
+  position: static;
+  width: 100%;
+  padding: 25px 0;
   @include opacity(0);
   transform: translateY(-20px);
   -webkit-transition: -webkit-transform 300ms ease-out;
@@ -109,14 +121,27 @@
 }
 
 @media (min-width: $screen-sm-min) {
-  .overlay-content {
-    iframe {
-      max-height: none;
-    }
+  .overlay-close {
+    top: 40px;
+    right: 20px;
+    @include square(50px);
+    font-size: 70px;
+    line-height: 50px;
+  }
+  .overlay-content-container {
+    width: $screen-sm-min;
+    margin-left: auto;
+    margin-right: auto;
   }
   .overlay-title {
     margin-top: $line-height-computed;
     margin-bottom: ($line-height-computed / 2);
     font-size: $font-size-h1;
+  }
+}
+
+@media (min-width: $screen-md-min) {
+  .overlay-close {
+    right: 5%;
   }
 }

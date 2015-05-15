@@ -98,7 +98,7 @@ var ScrollUpBtn        = require('./components/ScrollUpBtn.js');
 
     touchScroll.on("scroll", scrollController.update),
 
-    document.addEventListener("touchmove", function(e) {
+    document.getElementById("#scroll-container").addEventListener("touchmove", function(e) {
       e.preventDefault()
     }, !1);
 
