@@ -28,16 +28,14 @@ SvOverlay.prototype.show = function(){
 
   var onComplete = function(){
     this.$element.trigger('focus').trigger('shown.overlay')
-  }.bind(this) // this overlay
+  }.bind(this); // this overlay
 
-  var e = $.Event('show.overlay', { target: self.$element });
+  var e = $.Event('show.overlay', { overlay: this, target: self.$element });
   this.$element.trigger(e);
 
   if (this.isShown) return;
 
   this.isShown = true;
-
-  this.$body.addClass('overlay-open');
 
   this.escape();
 
@@ -46,6 +44,8 @@ SvOverlay.prototype.show = function(){
   this.enforceFocus();
 
   this.$element.fadeTo(500, 1, 'swing', onComplete); // 'easeOutQuart'
+
+  this.$body.addClass('overlay-open'); // this must go AFTER jquery starts the fadeTo method in order to get nice CSS3 effects on the overlay content
 
   this.$element.show();
 
@@ -62,10 +62,7 @@ SvOverlay.prototype.show = function(){
 SvOverlay.prototype.hide = function(e){
 
   var onComplete = function(){
-    console.log(this);
-    window.ele = this.$element;
-    this.$element.hide();
-    this.$element.trigger('hidden.overlay');
+    this.$element.hide().trigger('hidden.overlay');
   }.bind(this);
 
   if (e) e.preventDefault();
@@ -119,6 +116,15 @@ SvOverlay.prototype.escape = function() {
   else {
     this.$element.off('keydown.dismiss.overlay');
   }
+}
+
+/**
+ * Checks if the content inside the overlay exceeds the window height
+ *
+ * @return {bool}
+ */
+SvOverlay.prototype.hasOverflow = function() {
+  return this.$element.find('.overlay-content').height() >= window.innerHeight;
 }
 
 // MODAL PLUGIN DEFINITION

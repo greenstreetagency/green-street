@@ -22,7 +22,7 @@
 .home-tagline {
   position: absolute;
   width: 100%;
-  top: -$header-height-xs;
+  top: -$header-height-xs * 1.5;
   padding: 0 10px;
   font-size: 40px;
   text-transform: uppercase;
@@ -88,7 +88,7 @@
     background-image: url(/img/home-bg-sm.jpg);
   }
   .home-tagline {
-    top: -$header-height;
+    top: -$header-height * 1.5;
     font-size: 60px;
   }
 }
