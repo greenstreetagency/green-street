@@ -358,20 +358,20 @@ small {
 }
 
 a {
-  color: #0F6748;
+  color: #2ba6cb;
   text-decoration: none;
 }
 
 a:hover {
-  color: #0A432F !important;
+  color: #2795b6 !important;
 }
 
 a:active {
-  color: #0F6748 !important;
+  color: #2795b6 !important;
 }
 
 a:visited {
-  color: #0F6748 !important;
+  color: #2ba6cb !important;
 }
 
 h1 a,
@@ -380,7 +380,7 @@ h3 a,
 h4 a,
 h5 a,
 h6 a {
-  color: #0F6748;
+  color: #2ba6cb;
 }
 
 h1 a:active,
@@ -389,7 +389,7 @@ h3 a:active,
 h4 a:active,
 h5 a:active,
 h6 a:active {
-  color: #0F6748 !important;
+  color: #2ba6cb !important;
 }
 
 h1 a:visited,
@@ -398,7 +398,7 @@ h3 a:visited,
 h4 a:visited,
 h5 a:visited,
 h6 a:visited {
-  color: #0F6748 !important;
+  color: #2ba6cb !important;
 }
 
 /* Panels */
@@ -713,7 +713,7 @@ body.outlook p {
                         <table class="twelve columns">
                           <tr>
                             <td style="text-align: center;">
-                              <img src="http://greenstreetagency.com/img/logo-green-full.png" style="width: 300px;">
+                              <img src="http://streetvirus.com/img/sv-logo-trans.png" style="width: 300px;">
                             </td>
                             <td class="expander"></td>
                           </tr>
@@ -762,7 +762,7 @@ body.outlook p {
 
           <table>
             <tr>
-              <td style="text-align: center"><a href="http://greenstreetagency.com" style="display:block; margin-top: 20px; font-size: 12px;">greenstreetagency.com</a></td>
+              <td style="text-align: center"><a href="http://www.streetvirus.com" style="display:block; margin-top: 20px; font-size: 12px;">streetvirus.com</a></td>
             </tr>
           </table>
 
