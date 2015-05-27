@@ -13,6 +13,7 @@ $gray-lightest:           lighten(#000, 93.5%) !default; // #eee
 $white:                           #FFF         !default;
 
 $brand-primary:           #0F6748 !default;
+$brand-text:              darken($brand-primary, 15%);
 $gs-blue:                 #28ACE2 !default;
 $gs-teal:                 #13A89E !default;
 $gs-magenta:              #9F1F63 !default;
@@ -239,3 +240,4 @@ $header-height--usable:     $header-height    - $header-padding-vertical * 2;
 //
 $z-index-header: 100;
 $z-index-overlay: $z-index-header + 1;
+$z-index-section: 80;

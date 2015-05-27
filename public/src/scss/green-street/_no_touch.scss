@@ -1,0 +1,15 @@
+.no-touch {
+  .grid-item {
+    background-color: $black;
+  }
+  .grid-item-bg {
+    @include opacity(0.75);
+    transition: opacity 200ms ease;
+  }
+  .grid-item:hover {
+    .grid-item-bg {
+      @include opacity(1);
+      transition: opacity 200ms ease;
+    }
+  }
+}

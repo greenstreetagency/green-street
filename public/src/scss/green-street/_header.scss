@@ -1,9 +1,5 @@
 .header {
   z-index: $z-index-header;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
   height: $header-height-xs;
   padding: $header-padding-vertical $header-padding-horizontal;
   background-color: $white;
@@ -29,6 +25,13 @@
 
       }
     }
+  }
+  + section.js--full-screen {
+    // Pull this section up because we're going to fullscreen it but it's the top section so we want it to fill the screen minus the height of the header
+    position: relative;
+    overflow-y: visible;
+    margin-top: -$header-height-xs;
+    padding-bottom: $header-height-xs;
   }
   .blurb {
     float: right;
@@ -71,6 +74,30 @@
         margin-left: ($header-height--usable - 12px) / 2;
         top: -4px;
       }
+    }
+    + section.js--full-screen {
+      margin-top: -$header-height;
+      padding-bottom: $header-height;
+    }
+  }
+}
+
+@media (min-width: $screen-md-min) {
+  // Fix the header on desktop screens
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    + section.js--full-screen {
+      // TODO - Figure out this top section business
+      //
+      // reset the top of the section imediately following the header
+      // and add a top margin that matches the height of the header because the header is fixed tothe top and we're going to full screen this section
+      // but we don't want to keep the content centered in the visible region
+      margin-top: $header-height;
+      padding-bottom: 0;
+      overflow-y: hidden;
     }
   }
 }

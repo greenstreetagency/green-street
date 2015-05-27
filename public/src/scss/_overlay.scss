@@ -16,7 +16,6 @@
   right: 0;
   left: 0;
   z-index: $z-index-overlay;
-  -webkit-overflow-scrolling: touch;
 
   background: darken($brand-primary, 10%);
   background: transparentize(darken($brand-primary, 10%), 0.02);
@@ -109,7 +108,8 @@
   overflow: hidden;
   .overlay {
     overflow-x: hidden;
-    overflow-y: auto;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
     .overlay-content {
       @include opacity(1);
       transform: translateY(0px);

@@ -1,11 +1,114 @@
-@import "sections/about";
-@import "sections/clients";
 @import "sections/home";
-@import "sections/process";
+@import "sections/intro";
+@import "sections/clients";
+@import "sections/contact_us";
 
-.section-title {
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-top: 0;
+section {
+  position: relative;
+  z-index: $z-index-section;
+}
+
+.section-inner {
+  display: table;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
+}
+.section-content {
+  position: relative;
+  display: table-cell;
+  vertical-align: middle;
+}
+.section-bg {
+  @include square(100%);
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-size: cover;
+  backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
+  z-index: -1;
+
+  &--blue {
+    background-image: url('/img/bg/bg_blue_xs.jpg');
+  }
+  &--purple {
+    background-image: url('/img/bg/bg_purple_xs.jpg');
+  }
+}
+
+.section--ability {
+  text-align: center;
+  background-color: $brand-text;
+  color: $white;
+}
+.section-header {
   margin-bottom: $line-height-computed * 2;
+  font-size: $font-size-h2;
+  text-transform: uppercase;
+  white-space: nowrap
+}
+.section-points {
+  list-style: none;
+  margin: 0 0 ($line-height-computed * 2);
+  padding: 0;
+  text-transform: uppercase;
+  font-weight: bold;
+  li {
+    display: block;
+    margin: 8px 0;
+  }
+}
+
+.section-description {
+  max-width: $screen-sm-min * 0.8;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: $font-size-large;
+  padding-left: $grid-gutter-width / 2;
+  padding-right: $grid-gutter-width / 2;
+}
+
+@media (min-width: $screen-xs-min) {
+  .section-header {
+    font-size: $font-size-h1;
+  }
+  .section-points {
+    li {
+      display: inline-block;
+      margin: 0 12px;
+    }
+  }
+  .section-bg {
+    &--blue {
+      background-image: url('/img/bg/bg_blue_sm.jpg');
+    }
+    &--purple {
+      background-image: url('/img/bg/bg_purple_sm.jpg');
+    }
+  }
+}
+
+@media (min-width: $screen-sm-min) {
+  .section-header {
+    font-size: $font-size-h1 * 1.5;
+    letter-spacing: 3px;
+  }
+  .section-bg {
+    &--blue {
+      background-image: url('/img/bg/bg_blue.jpg');
+    }
+    &--purple {
+      background-image: url('/img/bg/bg_purple.jpg');
+    }
+  }
+}
+
+section.js--parallax {
+  .section-inner {
+    position: fixed;
+  }
 }

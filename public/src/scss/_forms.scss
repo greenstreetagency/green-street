@@ -18,7 +18,7 @@
   background-color: $black;
   background-color: transparent;
   border-color: $white;
-  border-color: transparentize($white, 0.4);
+  border-color: transparentize($white, 0.2);
   border-style: solid;
 
   font-size: $font-size-base;
@@ -35,32 +35,26 @@ input.overlay-input {
 
 textarea.overlay-input {
   border-width: 2px;
-  height: 60px;
+  border-radius: 5px;
+  height: 100px;
   padding-left: 10px - 2px // padding minus border-width
 }
 
 input[type="submit"].overlay-input {
-  background-color: $white;
-  background-color: transparentize($white, 0.1);
-  color: darken($brand-primary, 10%);
+  padding: 15px 45px;
+  background-color: transparentize($black, 0.8);
+  border: 2px solid $white;
+  border-radius: 5px;
   font-size: $font-size-base;
-  text-transform: uppercase;
   font-weight: bold;
-  transform: scale(1);
-  -webkit-transition: -webkit-transform 100ms ease-in-out;
-     -moz-transition: -moz-transform 100ms ease-in-out;
-       -o-transition: -o-transform 100ms ease-in-out;
-          transition: transform 100ms ease-in-out;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 200ms ease;
   &:hover,
-  &:focus {
-    transform: scale(1.02);
-  }
   &:active {
-    transform: scale(0.98);
-    -webkit-transition: -webkit-transform 50ms ease-out;
-       -moz-transition: -moz-transform 50ms ease-out;
-         -o-transition: -o-transform 50ms ease-out;
-            transition: transform 50ms ease-out;
+    color: $brand-primary;
+    background-color: $white;
+    transition: all 200ms ease;
   }
 }
 
@@ -68,7 +62,10 @@ input[type="submit"].overlay-input {
   .overlay-input {
     font-size: $font-size-large * 1.2;
   }
-  textarea.overlay-input {
-    height: 100px;
+  input[type="submit"].overlay-input {
+    display: inline-block;
+    width: auto;
+    float: right;
+    font-size: $font-size-large * 1.2;
   }
 }

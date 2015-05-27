@@ -19,88 +19,14 @@ body {
   height: 100%;
 }
 
-.scroll-container {
-  @include clearfix;
-  min-height: 100%;
-}
-
-.slide {
+header,
+section,
+footer,
+.section {
   position: relative;
-  height: 600px;
-  width: 100%;
-  left: 0;
-  float: left;
-  overflow: hidden;
-
-  &--fixed {
-    position: fixed !important;
-    top: $header-height-xs !important;
-  }
-}
-
-.slide-content {
-  @include size(100%, 100%);
-  position: relative;
-  z-index: 1;
-}
-
-.slide-background {
-  position: absolute;
-  top: -50%;
-  left: 0;
-  right: 0;
-  height: 200%;
-  @include opacity(0.1);
-  background-position: center center;
-  background-size: 256px;
-  background-repeat: repeat repeat;
-  &--phone {
-    background-image: url(/img/bg/phone.png);
-  }
-  &--touch {
-    background-image: url(/img/bg/touch.png);
-  }
-  &--executions {
-    background-image: url(/img/bg/plane@2x.png);
-  }
-  &--licensing {
-    background-image: url(/img/bg/email2.png);
-  }
-}
-
-@include retina-rule {
-  .slide-background {
-    &--phone {
-      background-image: url(/img/bg/phone@2x.png);
-    }
-    &--touch {
-      background-image: url(/img/bg/touch@2x.png);
-    }
-    &--executions {
-      background-image: url(/img/bg/plane@2x.png);
-    }
-    &--licensing {
-      background-image: url(/img/bg/email2@2x.png);
-    }
-  }
-}
-
-.v-center {
-  display: table;
-  height: 100%;
   width: 100%;
 }
-.v-center-content {
-  display: table-cell;
-  vertical-align: middle;
-  height: 100%;
-  text-align: center;
-}
 
-@media (min-width: $screen-sm-min) {
-  .slide {
-    &--fixed {
-      top: $header-height !important;
-    }
-  }
+section {
+  overflow-y: hidden;
 }
