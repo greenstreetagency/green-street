@@ -16,10 +16,15 @@ var HomePage = function() {
   this._SHIFT_MARGIN = 250; // How close to scrolling into the viewport before we start modifying elements
   this._oldScrollTop = 0; // Cache scroll top so we check if the user has scrolled or not
   this.stats = []; // Container for sizing information about the different sections of the homepage
+  this.homestats = {}; // Container for sizing information about the home section
 
   this.$el = $('body');
   this.$header = $('header');
+  this.$home = $('#home');
+  window.th = this.$home;
+  this.$homeTagline = this.$home.find('.home-tagline');
   this.$sections = this.$el.find('.js--parallax');
+
 
   /**
    * Returns the outer height of the header
@@ -78,7 +83,11 @@ var HomePage = function() {
       var $sec    = stat.$section;
       stat.height = $sec.outerHeight();
       stat.top    = $sec.position().top;
-    };
+    }
+
+    this.homestats.top = this.$home.offset()['top'];
+    this.homestats.height = this.$home.outerHeight();
+    this.homestats.taglineHeight = this.$homeTagline.height();
   }
 
   var getShiftYMethod = function(e) {
@@ -134,6 +143,15 @@ var HomePage = function() {
 
         }
       }
+
+      // Home tagline parallax
+      var num = (scrollPosition - this.homestats.top) / this.homestats.height;
+      var scale = clamp(num, 0, 1).toFixed(4);
+
+      this.shiftEl(this.$homeTagline, (this.homestats.taglineHeight * scale) + "px");
+
+      this.$homeTagline.css('opacity', Math.abs(scale - 1));
+
     }
 
     this._requestAnimationFrame.call(window, this.frameCheck.bind(this));

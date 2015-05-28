@@ -18,6 +18,8 @@
   font-weight: bold;
   text-align: center;
   letter-spacing: 2px;
+  -webkit-backface-visibility: hidden;
+  will-change: transform;
   span {
     font-size: $font-size-h3;
     display: block;
