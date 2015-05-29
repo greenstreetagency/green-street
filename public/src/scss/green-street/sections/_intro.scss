@@ -42,12 +42,32 @@
 .intro-nugz {
   position: absolute;
   z-index: -1;
-  bottom: -20px;
-  right: 0;
+  bottom: 50px;
+  right: -120px;
   background-image: url(/img/nugs.jpg);
-  background-size: 304px 203px;
-  height: 203px;
-  width: 304px;
+  background-size: 450px 111px;
+  height: 111px;
+  width: 450px;
+}
+
+.section-bg {
+  &.intro-nugz {
+    background-image: url(/img/nugs.jpg);
+    background-size: 450px 111px;
+    background-position: 150% 96%;
+    background-repeat: no-repeat;
+  }
+}
+
+@include retina-rule {
+  .intro-nugz {
+    background-image: url(/img/nugs@2x.jpg);
+  }
+  .section-bg {
+    &.intro-nugz {
+      background-image: url(/img/nugs@2x.jpg);
+    }
+  }
 }
 
 @media (min-width: $screen-xs-min) {
@@ -60,7 +80,8 @@
   .intro-header {
     font-size: $font-size-h1 * 2;
   }
-  .intro-nugz {
-    bottom: 5%;
+  .section-bg.intro-nugz {
+    background-position: 115% 96%;
   }
+
 }

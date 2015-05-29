@@ -15,12 +15,14 @@ section {
   height: 100%;
   width: 100%;
   backface-visibility: hidden;
+  will-change: transform;
   transform: translate3d(0, 0, 0);
 }
 .section-content {
   position: relative;
   display: table-cell;
   vertical-align: middle;
+  transform: translate3d(0, 0, 0);
 }
 .section-bg {
   @include square(100%);
@@ -28,10 +30,11 @@ section {
   top: 0;
   left: 0;
   background-size: cover;
-  background-position: 50% 50%;
+  background-position: center center;
   backface-visibility: hidden;
   transform: translate3d(0, 0, 0);
   z-index: -1;
+  overflow: hidden;
 
   &--blue {
     background-image: url('/img/bg/bg_blue_xs.jpg');
@@ -44,6 +47,12 @@ section {
   }
   &--magenta {
     background-image: url('/img/bg/bg_magenta_xs.jpg');
+  }
+  &--yellow {
+    background-image: url('/img/bg/bg_yellow_xs.jpg');
+  }
+  &--snoop {
+    background-image: url('/img/bg/bg_snoop_xs.jpg');
   }
 }
 
@@ -71,7 +80,7 @@ section {
 }
 
 .section-description {
-  max-width: $screen-sm-min * 0.8;
+  max-width: $screen-sm-min * 0.9;
   margin-left: auto;
   margin-right: auto;
   font-size: $font-size-large;
@@ -101,6 +110,12 @@ section {
     }
     &--magenta {
       background-image: url('/img/bg/bg_magenta_sm.jpg');
+    }
+    &--yellow {
+      background-image: url('/img/bg/bg_yellow_sm.jpg');
+    }
+    &--snoop {
+      background-image: url('/img/bg/bg_snoop_sm.jpg');
     }
   }
 }
