@@ -21,7 +21,6 @@ var HomePage = function() {
   this.$el = $('body');
   this.$header = $('header');
   this.$home = $('#home');
-  window.th = this.$home;
   this.$homeTagline = this.$home.find('.home-tagline');
   this.$sections = this.$el.find('.js--parallax');
 

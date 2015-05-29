@@ -28,6 +28,7 @@ section {
   top: 0;
   left: 0;
   background-size: cover;
+  background-position: 50% 50%;
   backface-visibility: hidden;
   transform: translate3d(0, 0, 0);
   z-index: -1;
@@ -37,6 +38,12 @@ section {
   }
   &--purple {
     background-image: url('/img/bg/bg_purple_xs.jpg');
+  }
+  &--teal {
+    background-image: url('/img/bg/bg_teal_xs.jpg');
+  }
+  &--magenta {
+    background-image: url('/img/bg/bg_magenta_xs.jpg');
   }
 }
 
@@ -89,6 +96,12 @@ section {
     &--purple {
       background-image: url('/img/bg/bg_purple_sm.jpg');
     }
+    &--teal {
+      background-image: url('/img/bg/bg_teal_sm.jpg');
+    }
+    &--magenta {
+      background-image: url('/img/bg/bg_magenta_sm.jpg');
+    }
   }
 }
 
@@ -103,6 +116,21 @@ section {
     }
     &--purple {
       background-image: url('/img/bg/bg_purple.jpg');
+    }
+    &--teal {
+      background-image: url('/img/bg/bg_teal.jpg');
+    }
+    &--magenta {
+      background-image: url('/img/bg/bg_magenta.jpg');
+    }
+    &--orange {
+      background-image: url('/img/bg/bg_orange.jpg');
+    }
+    &--yellow {
+      background-image: url('/img/bg/bg_yellow.jpg');
+    }
+    &--snoop {
+      background-image: url('/img/bg/bg_snoop.jpg');
     }
   }
 }
