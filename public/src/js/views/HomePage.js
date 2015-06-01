@@ -1,6 +1,7 @@
-var $     = require('jquery');
-var rAF   = require('../components/requestAnimationFrame');
-var _     = require('underscore');
+var $      = require('jquery');
+var rAF    = require('../components/requestAnimationFrame');
+var _      = require('underscore');
+var bowser = require('bowser').browser;
 
 var lerp  = require('../math/lerp');
 var norm  = require('../math/norm');
@@ -10,6 +11,7 @@ var clamp = require('../math/clamp');
 var HomePage = function() {
 
   var _this = this;
+  var _initialized = false;
 
   this._requestAnimationFrame = rAF;
   this._BG_SPEED = 0.8; // Speed modifier for the parallax background
@@ -17,6 +19,7 @@ var HomePage = function() {
   this._oldScrollTop = 0; // Cache scroll top so we check if the user has scrolled or not
   this.stats = []; // Container for sizing information about the different sections of the homepage
   this.homestats = {}; // Container for sizing information about the home section
+  this.headerstats = {}; // Container for sizing information about the header
 
   this.$window = $(window);
   this.$el = $('body');
@@ -99,34 +102,34 @@ var HomePage = function() {
 
     var f = function(){
       _.throttle(_this.onResize, 50).bind(_this);
-      setTimeout(_this.onResize.bind(_this), 100);
     }
 
-    this.$window.on('resize', f).trigger('resize');
+    this.$window.on('resize', _this.onResize.bind(_this));
+    this.$window.on('orientationchange', _this.onOrientationChange.bind(_this));
 
-    this.calculateSizeStats();
+    this.onResize();
 
     this._requestAnimationFrame.call(window, this.frameCheck.bind(this));
+
+     _initialized = true;
 
   }
 
   this.getUsableTop = function() {
-    return window.innerHeight - (headerIsFixed() ? getHeaderHeight() : 0 );
+    return window.innerHeight - (this.headerstats.fixed ? this.headerstats.height : 0 );
   }
 
   this.getUsableScrollTop = function() {
-    var t = $(window).scrollTop() + (headerIsFixed() ? getHeaderHeight() : 0 );
+    var t = this.$window.scrollTop() + (this.headerstats.fixed ? this.headerstats.height : 0 );
     return parseFloat(t.toFixed(2));
   }
 
   this.fullScreen = function() {
     var viewportHeight = getViewportHeight();
-    var headerHeight   = getHeaderHeight();
-    var fixedHeader    = headerIsFixed();
-    var newHeight      = viewportHeight - (fixedHeader ? headerHeight : 0) + 1;
+    var newHeight      = viewportHeight - (this.headerstats.fixed ? this.headerstats.height : 0) + 1;
 
     this.$fullSizes.height(newHeight);
-    this.$home.height(viewportHeight - (fixedHeader ? 0 : headerHeight));
+    this.$home.height(viewportHeight - (this.headerstats.fixed ? 0 : this.headerstats.height));
   }
 
   this.calculateSizeStats = function() {
@@ -138,12 +141,26 @@ var HomePage = function() {
       stat.top    = $sec.position().top;
     }
 
+    this.headerstats.fixed = headerIsFixed();
+    this.headerstats.height = getHeaderHeight();
+
     this.homestats.top = this.$home.offset()['top'];
     this.homestats.height = this.$home.outerHeight();
     this.homestats.taglineHeight = this.$homeTagline.height();
   }
 
   var getShiftYMethod = function(e) {
+    if (Modernizr.csstransforms3d && (!e || !e.skip3D)) {
+        var t = Modernizr.prefixed("transform");
+        return function(e, n) {
+            // var r = e.css(t);
+            // var i = r.match(/-?[0-9\.]+/g);
+            // if (!i)
+            //     return;
+            // shiftX = i[i.length > 6 ? 13 : 4], e.css(t, "translate3D(" + shiftX + "px, " + n + ", 0)")
+            e.css(t, "translate3D(0, " + n + ", 0)")
+        }
+    }
     if (Modernizr.csstransforms || Modernizr.csstransforms3d) {
         var t = Modernizr.prefixed("transform");
         return function(e, n) {
@@ -155,7 +172,7 @@ var HomePage = function() {
     }
   }
 
-  this.shiftEl = getShiftYMethod();
+  this.shiftY = getShiftYMethod();
 
   this.frameCheck = function(force){
     var scrollPosition = this.getUsableScrollTop();
@@ -164,28 +181,32 @@ var HomePage = function() {
 
       this._oldScrollTop = scrollPosition;
 
-      for (var i = this.stats.length - 1; i >= 0; i--) {
-        var s = this.stats[i];
-        var diff = scrollPosition - s.top;
+      var l = this.stats.length;
+      var s, diff;
+      for (var i = 0; i < l; i++) {
+        s    = this.stats[i];
+        diff = scrollPosition - s.top;
 
         // if (any part of the section is within the viewport + SHIFT_MARGIN on top and bottom)
         if( diff > -(s.height + this._SHIFT_MARGIN) && diff < s.height + this._SHIFT_MARGIN ) {
           
+          var diffReduced = diff - (this.headerstats.fixed ? this.headerstats.height : 0);
+
           // Then ensure the inner part is visible
           s.$sectionInner.css({visibility: 'visible'});
           
           // reset the 'diff' to be clamped between +- the section height
           diff = clamp(diff, -s.height, s.height);
 
-          this.shiftEl(s.$sectionInner, -diff + "px");
+          this.shiftY(s.$sectionInner, - diffReduced + "px");
           
           // Turns diff into a normalized number between -1 and 1 to use as a shift amount
           diff = map(diff, -s.height, s.height, -1, 1);
 
           if(diff != s.oldLocalShift) {
             s.oldLocalShift = diff;
-            var f = clamp(map(diff, 0, 1, 0, s.height), 0, s.height);
-            this.shiftEl(s.$sectionBG, Math.round(f * this._BG_SPEED) + "px");
+            var f = clamp(map(diff, 0, 1, 0, s.height + this.headerstats.height), 0, s.height);
+            this.shiftY(s.$sectionBG, Math.round(f * this._BG_SPEED) + "px");
           }
         } else {
           s.$sectionInner.css({visibility: 'hidden'});
@@ -196,7 +217,7 @@ var HomePage = function() {
       var num = (scrollPosition - this.homestats.top) / this.homestats.height;
       var scale = clamp(num, 0, 1).toFixed(4);
 
-      this.shiftEl(this.$homeTagline, (this.homestats.taglineHeight * scale) + "px");
+      this.shiftY(this.$homeTagline, (this.homestats.taglineHeight * scale) + "px");
 
       this.$homeTagline.css('opacity', Math.abs(scale - 1));
 
@@ -205,10 +226,22 @@ var HomePage = function() {
     this._requestAnimationFrame.call(window, this.frameCheck.bind(this));
   }
 
-  this.onResize = function() {
+  this.resetSizing = function() {
     this.fullScreen();
     this.calculateSizeStats();
     this.frameCheck(!0);
+  }
+
+  this.onResize = function() {
+    if(bowser.ios == true && _initialized) {
+      // Only resize once on mobile safari to avoid constant resizing due to the hiding and showing of the address / bookmark bars
+      return;
+    }
+    this.resetSizing();
+  }
+
+  this.onOrientationChange = function() {
+    this.resetSizing();
   }
 
   return this;
