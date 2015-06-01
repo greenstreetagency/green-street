@@ -63,7 +63,7 @@ ScrollUpBtn = function($el) {
     $btn.css({
       cursor: 'pointer'
     })
-    .attr('title', 'Scroll To Top')
+    .attr('title', 'Get Higher')
     .on('click', function(e){
       self.scrollToTop();
       return false;

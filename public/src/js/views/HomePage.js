@@ -18,12 +18,13 @@ var HomePage = function() {
   this.stats = []; // Container for sizing information about the different sections of the homepage
   this.homestats = {}; // Container for sizing information about the home section
 
+  this.$window = $(window);
   this.$el = $('body');
   this.$header = $('header');
   this.$home = $('#home');
-  window.th = this.$home;
   this.$homeTagline = this.$home.find('.home-tagline');
   this.$sections = this.$el.find('.js--parallax');
+  this.$fullSizes = this.$el.find('.js--full-screen');
 
 
   /**
@@ -44,6 +45,42 @@ var HomePage = function() {
     return _this.$header.css('position') == 'fixed';
   }
 
+  /**
+   * Returns the visible viewport dimensions
+   *
+   * @returns {Object} object with height and width properties
+   */
+  function getViewportDimensions() {
+    var dim = {};
+
+    if (typeof window.innerWidth != 'undefined') {
+     dim.width = window.innerWidth;
+     dim.height = window.innerHeight;
+    }
+     else if (typeof document.documentElement != 'undefined' && 
+              typeof document.documentElement.clientWidth != 'undefined' &&
+              document.documentElement.clientWidth != 0) {
+    dim.width = document.documentElement.clientWidth;
+    dim.height = document.documentElement.clientHeight;
+   }
+   else {
+    dim.width = document.getElementsByTagName('body')[0].clientWidth;
+    dim.height = document.getElementsByTagName('body')[0].clientHeight;
+   }
+
+   return dim;
+
+  }
+
+  /**
+   * Returns the visible viewport height
+   *
+   * @returns {Number}
+   */
+  function getViewportHeight() {
+    return getViewportDimensions()['height'];
+  }
+
   this.init = function() {
 
     this.$sections.each(function(i, el){
@@ -60,11 +97,17 @@ var HomePage = function() {
     
     }.bind(this));
 
+    var f = function(){
+      _.throttle(_this.onResize, 50).bind(_this);
+      setTimeout(_this.onResize.bind(_this), 100);
+    }
+
+    this.$window.on('resize', f).trigger('resize');
+
     this.calculateSizeStats();
 
     this._requestAnimationFrame.call(window, this.frameCheck.bind(this));
 
-    $(window).on('resize', _.throttle(this.onResize, 50).bind(_this));
   }
 
   this.getUsableTop = function() {
@@ -74,6 +117,16 @@ var HomePage = function() {
   this.getUsableScrollTop = function() {
     var t = $(window).scrollTop() + (headerIsFixed() ? getHeaderHeight() : 0 );
     return parseFloat(t.toFixed(2));
+  }
+
+  this.fullScreen = function() {
+    var viewportHeight = getViewportHeight();
+    var headerHeight   = getHeaderHeight();
+    var fixedHeader    = headerIsFixed();
+    var newHeight      = viewportHeight - (fixedHeader ? headerHeight : 0) + 1;
+
+    this.$fullSizes.height(newHeight);
+    this.$home.height(viewportHeight - (fixedHeader ? 0 : headerHeight));
   }
 
   this.calculateSizeStats = function() {
@@ -104,10 +157,10 @@ var HomePage = function() {
 
   this.shiftEl = getShiftYMethod();
 
-  this.frameCheck = function(){
+  this.frameCheck = function(force){
     var scrollPosition = this.getUsableScrollTop();
 
-    if(scrollPosition != this._oldScrollTop) {
+    if(scrollPosition != this._oldScrollTop || force == true) {
 
       this._oldScrollTop = scrollPosition;
 
@@ -133,14 +186,9 @@ var HomePage = function() {
             s.oldLocalShift = diff;
             var f = clamp(map(diff, 0, 1, 0, s.height), 0, s.height);
             this.shiftEl(s.$sectionBG, Math.round(f * this._BG_SPEED) + "px");
-            
-            // var l = lerp(diff < 0.25 ? 0 : diff, 0.25, 1, 0, 0.8);
-            // s.sectionCover.css({opacity: 1, visibility: 1 > 0 ? "visible" : "hidden"});
           }
         } else {
-
           s.$sectionInner.css({visibility: 'hidden'});
-
         }
       }
 
@@ -158,8 +206,9 @@ var HomePage = function() {
   }
 
   this.onResize = function() {
+    this.fullScreen();
     this.calculateSizeStats();
-    this.frameCheck();
+    this.frameCheck(!0);
   }
 
   return this;

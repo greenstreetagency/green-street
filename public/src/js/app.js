@@ -19,7 +19,6 @@ var homePage           = require('./views/HomePage.js');
   var $win       = $(window);
   var $body      = $(document.body);
   var $header    = $('.header');
-  var $fullSizes = $('.js--full-screen');
   
   var isFirefox   = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
 
@@ -63,12 +62,11 @@ var homePage           = require('./views/HomePage.js');
   }
 
   function onResize() {
-    var newHeight = getViewportHeight() + 1 - (headerIsFixed() ? getHeaderHeight() : 0);
-    $fullSizes.height(newHeight);
+
   }
 
   function addTouchSupport() {
-    FastClick(document.body);
+
   }
 
   /**
