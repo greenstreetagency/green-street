@@ -138,9 +138,6 @@ section {
     &--magenta {
       background-image: url('/img/bg/bg_magenta.jpg');
     }
-    &--orange {
-      background-image: url('/img/bg/bg_orange.jpg');
-    }
     &--yellow {
       background-image: url('/img/bg/bg_yellow.jpg');
     }
@@ -151,7 +148,11 @@ section {
 }
 
 section.js--parallax {
+  &#compliance {
+    overflow-y: hidden;
+  }
   .section-inner {
     position: fixed;
+    display: table;
   }
 }

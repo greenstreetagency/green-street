@@ -41,6 +41,10 @@ var homePage           = require('./views/HomePage.js');
       return false;
     });
 
+    $('#contact-form').on('shown.overlay', function(){
+      $(this).find('input').first().focus();
+    });
+
   }
 
   function scrollToOffset(offset) {
@@ -67,27 +71,6 @@ var homePage           = require('./views/HomePage.js');
 
   function addTouchSupport() {
 
-  }
-
-  /**
-   * Returns the visible viewport dimensions
-   *
-   * @returns {Object} object with height and width properties
-   */
-  function getViewportDimensions() {
-    return {
-      height : Math.max(document.documentElement.clientHeight, window.innerHeight || 0),
-      width  : Math.max(document.documentElement.clientWidth, window.innerWidth || 0)
-    }
-  }
-
-  /**
-   * Returns the visible viewport height
-   *
-   * @returns {Number}
-   */
-  function getViewportHeight() {
-    return getViewportDimensions()['height'];
   }
 
   /**
