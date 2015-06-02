@@ -39,34 +39,17 @@
   margin-right: 2px;
 }
 
-.intro-nugz {
-  position: absolute;
-  z-index: -1;
-  bottom: 50px;
-  right: -120px;
-  background-image: url(/img/nugs.jpg);
-  background-size: 450px 111px;
-  height: 111px;
-  width: 450px;
-}
-
-.section-bg {
-  &.intro-nugz {
-    background-image: url(/img/nugs.jpg);
-    background-size: 450px 111px;
-    background-position: 150% 96%;
-    background-repeat: no-repeat;
-  }
+.section-bg.intro-succulents {
+  background-image: url(/img/succulents.jpg);
+  background-size: 333px 157px;
+  background-repeat: no-repeat;
+  background-position: 101% 95%;
+  @include opacity(0.95);
 }
 
 @include retina-rule {
-  .intro-nugz {
-    background-image: url(/img/nugs@2x.jpg);
-  }
-  .section-bg {
-    &.intro-nugz {
-      background-image: url(/img/nugs@2x.jpg);
-    }
+  .section-bg.intro-succulents {
+    background-image: url(/img/succulents@2x.jpg);
   }
 }
 
@@ -74,14 +57,19 @@
   .intro-header {
     font-size: $font-size-h1 * 1.3;
   }
+  .section-bg.intro-succulents {
+    background-size: 375px 177px;
+    background-position: 101% 85%;
+  }
 }
 
 @media (min-width: $screen-sm-min) {
   .intro-header {
     font-size: $font-size-h1 * 2;
   }
-  .section-bg.intro-nugz {
-    background-position: 115% 75%;
+  .section-bg.intro-succulents {
+    background-size: 500px 236px;
+    background-position: 101% 73%;
   }
 
 }
