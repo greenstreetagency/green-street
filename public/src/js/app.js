@@ -8,7 +8,7 @@ window.jQuery   = $; // Expose jQuery globally for plugins
 
 // Components
 var ContactForm        = require('./components/ContactForm.js');
-var ScrollUpBtn        = require('./components/ScrollUpBtn.js');
+// var ScrollUpBtn        = require('./components/ScrollUpBtn.js');
 
 // Views
 var homePage           = require('./views/HomePage.js');
@@ -23,7 +23,7 @@ var homePage           = require('./views/HomePage.js');
   var isFirefox   = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
 
   var contactForm      = new ContactForm( $('form#contact') );
-  var scrollUpBtn      = new ScrollUpBtn( $('.blurb img')   );
+  // var scrollUpBtn      = new ScrollUpBtn( $('.blurb img')   );
 
   function initialize() {
     attachHandlers();    
