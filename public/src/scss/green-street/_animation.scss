@@ -1,0 +1,13 @@
+@keyframes spin-360 {
+  0%   { transform: rotateZ(0);      }
+  100% { transform: rotateZ(-360deg); }
+}
+
+.spin-360 {
+  animation-name: spin-360;
+  animation-duration: 1000ms;
+}
+.spin-360--once {
+  @extend .spin-360;
+  animation-iteration-count: 1;
+}

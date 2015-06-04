@@ -1,9 +1,5 @@
 .header {
   z-index: $z-index-header;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
   height: $header-height-xs;
   padding: $header-padding-vertical $header-padding-horizontal;
   background-color: $white;
@@ -72,6 +68,16 @@
         top: -4px;
       }
     }
+  }
+}
+
+@media (min-width: $screen-md-min) {
+  // Fix the header on desktop screens
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
   }
 }
 

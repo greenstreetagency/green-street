@@ -15,7 +15,7 @@ function bundler(file) {
   });
 
   b.require('./public/src/js/app.js', { expose: 'app' });
-  b.transform(reactify);
+  // b.transform(reactify);
 
   return b.bundle();
 }
