@@ -26,7 +26,7 @@ module.exports = function() {
     gulp.src('public/src/js/app.js'),
     transform(bundler),
     rename('app.js'),
-    // uglify(),
+    uglify(),
     gulp.dest('public/dist/js')
   ];
 
