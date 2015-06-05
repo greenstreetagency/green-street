@@ -8,6 +8,8 @@ if(! ($requestIsAjax && $_SERVER['REQUEST_METHOD'] == 'POST') ) {
   die(); // Don't allow requests to this page unless they're sent via ajax and as a POST
 }
 
+// Let's make an address to send the emails 'from'
+$emailFrom = 'inquiry@greenstreetagency.com';
 // Where are we sending these emails to?
 $emailTo = 'nate@greenstreetagency.com';
 // What is the email subject line?
@@ -22,7 +24,7 @@ if(isset($_POST['url']) && $_POST['url'] == '') {
 	} else if (!preg_match("/^[_\.0-9a-zA-Z-]+@([0-9a-zA-Z][0-9a-zA-Z-]+\.)+[a-zA-Z]{2,6}$/i", trim($_POST['email']))) {
 		$hasError = true;
 	} else {
-		$email = trim($_POST['email']);
+		$senderEmail = trim($_POST['email']);
 	}
 
 	// Check to make sure comments were entered
@@ -44,8 +46,8 @@ if(isset($_POST['url']) && $_POST['url'] == '') {
 		$body = ob_get_contents();
 		ob_end_clean();
 
-		$headers  = 'From: '.$email . "\r\n";
-		$headers .= 'Reply-To: ' . $email . "\r\n";
+		$headers  = 'From: '.$emailFrom . "\r\n";
+		$headers .= 'Reply-To: ' . $senderEmail . "\r\n";
 		$headers .= 'Content-Type: text/html; charset=ISO-8859-1' . "\r\n";
 
 		$emailSent = mail($emailTo, $subject, $body, $headers);
