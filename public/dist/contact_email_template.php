@@ -2,7 +2,7 @@
 
   // Required Vars
   // =============
-  // (str) $email
+  // (str) $senderEmail
   // (str) $subject
   // (str) $comments
 
@@ -713,7 +713,7 @@ body.outlook p {
                         <table class="twelve columns">
                           <tr>
                             <td style="text-align: center;">
-                              <img src="http://streetvirus.com/img/sv-logo-trans.png" style="width: 300px;">
+                              <img src="http://greenstreetagency.com/img/logo-green-full.png" style="width: 200px;">
                             </td>
                             <td class="expander"></td>
                           </tr>
@@ -740,7 +740,7 @@ body.outlook p {
                         <tr>
                           <td>
                             <p style="font-size: 16px;line-height:21px; text-align: center;"><?php echo $subject; ?></p>
-                            <p>Email: <a href="mailto:<?php echo $email; ?>"><?php echo $email; ?></a></p>
+                            <p>Email: <a href="mailto:<?php echo $senderEmail; ?>"><?php echo $senderEmail; ?></a></p>
                             <p>Message:</p>
                             <blockquote style="color: #888; border-left: 2px solid #AAA; padding-left: 15px;">
                               <?php echo $comments; ?>
