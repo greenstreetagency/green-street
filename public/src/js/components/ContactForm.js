@@ -1,5 +1,7 @@
 var $ = require('jquery');
 
+// Will send analytics event on form submit if window.ga is available (via anaytics.js)
+
 ContactForm = function($form){
 
   var self = this;
@@ -116,6 +118,7 @@ ContactForm = function($form){
    */
   this.beforeSend = function(){
     $inputSubmit.val( messages.sending ).prop('disabled', 'disabled');
+    window.ga && ga('send', 'event', 'Contact Form', 'Message Submit');
   };
 
   /**
