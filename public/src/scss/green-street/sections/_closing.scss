@@ -24,9 +24,16 @@
       padding: 0 $header-padding-horizontal;
       margin: 0 0 20px;
       text-align: center;
-      > img {
+      .logo-frame {
+        position: relative;
+      }
+      img {
+        display: none;
         width: 120px;
         max-width: 100%;
+        &.current {
+          display: inline-block;
+        }
       }
     }
   }
