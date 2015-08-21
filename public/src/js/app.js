@@ -9,6 +9,7 @@ window.jQuery   = $; // Expose jQuery globally for plugins
 // Components
 var ContactForm        = require('./components/ContactForm.js');
 // var ScrollUpBtn        = require('./components/ScrollUpBtn.js');
+var LogoGrid           = require('./components/LogoGrid.js');
 
 // Views
 var homePage           = require('./views/HomePage.js');
@@ -23,10 +24,13 @@ var homePage           = require('./views/HomePage.js');
   var isFirefox   = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
 
   var contactForm      = new ContactForm( $('form#contact') );
+  var logoGrid         = new LogoGrid( $('.logo-grid') );
+  window.logoGrid = logoGrid;
   // var scrollUpBtn      = new ScrollUpBtn( $('.blurb img')   );
 
   function initialize() {
-    attachHandlers();    
+    attachHandlers();
+    logoGrid.startFading();
   }
 
   function attachHandlers() {
