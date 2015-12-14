@@ -13,7 +13,7 @@ Once I figure out how to use git hooks to automate this process, we won't need t
 ### Deployment
 
 ```
-ssh -i streetvirus.pem ec2-user@52.10.10.149
+ssh -i ~/.ssh/streetvirus.pem ec2-user@52.10.10.149
 cd  /var/www/sites/greenstreetagency.com
 git branch // Make sure you're on 'production'
 git pull
