@@ -9,14 +9,35 @@ function LogoGrid($el) {
 
   var transitionInterval; // Keep track of the transitioning interval to be able to start and stop the transitions;
   var lastFrameIndex; // Keep track of this to prevent transitioning the same frame over and over;
+  var transitionDuration = 4000; // How long to wait between transitions
+  var lazyLoadAttribute = 'data-lazy-src'; // Image tag attribute containing the src url of the image
 
   /* HELPERS */
   function getRandomInt(min, max){
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
-  /* CLASS METHODS */
+  /**
+   * Checks if an $(<img>) has a 'src' attribute
+   * When we lazy load the images, we add the src attribute when we need to load the img
+   * @return {bool}
+   */
+  function isImageLoaded($img){
+    var src = $img.attr('src');
+    return (typeof attr !== typeof undefined && attr !== false);
+  }
 
+  /**
+   * Loads an image by setting the src attribute to whatever was in the 'data-lazy-src' attribute
+   * @return {null}
+   */
+  function loadImage($img){
+    var src = $img.attr( lazyLoadAttribute );
+    $img.attr('src', src);
+    $img.removeAttr( lazyLoadAttribute );
+  }
+
+  /* CLASS METHODS */
 
   /**
    * Initializes the grid of logos by setting the $frames property to all frames with more than one image
@@ -53,10 +74,14 @@ function LogoGrid($el) {
 
     lastFrameIndex = this.$frames.index($frame);
 
+    if(!isImageLoaded($next)){
+      loadImage($next);
+    }
+
     $current.fadeOut(1000, function(){
-        $(this).removeClass('current');
+        $current.removeClass('current');
         $next.fadeIn(1000, function(){
-            $(this).addClass('current');
+            $next.addClass('current');
         });
     });
 
@@ -67,7 +92,7 @@ function LogoGrid($el) {
    * @return {this}
    */
   this.startFading = function(){
-    transitionInterval = setInterval(_this.transitionLogo.bind(_this), 4000);
+    transitionInterval = setInterval(_this.transitionLogo.bind(_this), transitionDuration);
     return this;
   };
 
