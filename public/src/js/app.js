@@ -8,7 +8,6 @@ window.jQuery   = $; // Expose jQuery globally for plugins
 
 // Components
 var ContactForm        = require('./components/ContactForm.js');
-// var ScrollUpBtn        = require('./components/ScrollUpBtn.js');
 var LogoGrid           = require('./components/LogoGrid.js');
 
 // Views
@@ -26,7 +25,6 @@ var homePage           = require('./views/HomePage.js');
   var contactForm      = new ContactForm( $('form#contact') );
   var logoGrid         = new LogoGrid( $('.logo-grid') );
   window.logoGrid = logoGrid;
-  // var scrollUpBtn      = new ScrollUpBtn( $('.blurb img')   );
 
   function initialize() {
     attachHandlers();
@@ -62,10 +60,10 @@ var homePage           = require('./views/HomePage.js');
   }
 
   function onLoaded() {
-    if(Modernizr.touch) {
-      setTimeout(addTouchSupport, 200);
-    }
-    
+    // if(Modernizr.touch) {
+    //   setTimeout(addTouchSupport, 200);
+    // }
+
     homePage.init(); // Needs to go here because it does calculations and needs everything to be loaded
   }
 
