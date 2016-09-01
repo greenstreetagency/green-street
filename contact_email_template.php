@@ -762,7 +762,7 @@ body.outlook p {
 
           <table>
             <tr>
-              <td style="text-align: center"><a href="http://www.streetvirus.com" style="display:block; margin-top: 20px; font-size: 12px;">streetvirus.com</a></td>
+              <td style="text-align: center"><a href="http://greenstreetagency.com" style="display:block; margin-top: 20px; font-size: 12px;">greenstreetagency.com</a></td>
             </tr>
           </table>
 
