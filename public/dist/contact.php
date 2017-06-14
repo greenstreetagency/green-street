@@ -11,7 +11,7 @@ if(! ($requestIsAjax && $_SERVER['REQUEST_METHOD'] == 'POST') ) {
 // Let's make an address to send the emails 'from'
 $emailFrom = 'inquiry@greenstreetagency.com';
 // Where are we sending these emails to?
-$emailTo = 'nate@greenstreetagency.com';
+$emailTo = 'rama@greenstreetagency.com';
 // What is the email subject line?
 $subject = "You've received a message from Greenstreetagency.com";
 
